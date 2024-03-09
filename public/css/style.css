@@ -1,3 +1,89 @@
-h1{
-    color: red;
+/* header */
+    html{
+        box-sizing: border-box;
+    }
+    .header{
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .header .container{
+        max-width: 1200px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .header .container .row-align-item-center {
+        display: flex;
+        justify-content : space-between; 
+        align-items: center;   
+    }
+    .header .container .row-align-item-center .col-3{
+        max-width: 6%;
+        aspect-ratio: 4/3;
+    }
+    .header .container .row-align-item-center .col-3 img{
+        position: cover;
+        width: 100%;
+        height: 100%;
+    }
+    .header .container .row-align-item-center .col-9{
+        max-width: 30%;
+    }
+    .header .container .row-align-item-center .col-9 .inner-menu ul{
+        display: flex;
+        list-style-type: none;
+        justify-content: space-around;
+    }
+    .header .container .row-align-item-center .col-9 .inner-menu a{
+        text-decoration: none;
+    }
+/* end header */
+
+
+
+/* product */
+    .container.my-3 .box-head .inner-title{
+        color: green;
+    } 
+    .container.my-3 .row .col-4.mb-3{
+        display: inline-block;
+        width: 200px;
+        padding: 0;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 20px;
+        border: 1px solid #EEEEEE;
+    }
+    .container.my-3 .row .col-4.mb-3 .product-item img{
+        object-fit: cover;
+        width: 100%;
+        
+    }
+    .container.my-3 .row .col-4.mb-3 .inner-content {
+        margin: 10px 10px;
+    }
+    .container.my-3 .row .col-4.mb-3 .inner-content .inner-price-new{
+        color: green;
+        font-weight: 600;
+    }
+    .container.my-3 .row .col-4.mb-3 .inner-content .inner-price-old{
+        text-decoration: line-through;
+        color: red;
+        font-weight: 600;
+        margin: 10px 0;
+    }
+    .container.my-3 .row .col-4.mb-3 .inner-content .inner-discount{
+        background-color: red;
+        border-radius: 10px;
+        color: #fff;
+        display: inline-block;
+        padding: 0 10px;
+    }
+/* end product */
+
+/* footer  */
+footer{
+    background-color: #353846;
+    color: #fff;
+    text-align: center;
 }
+/* end footer  */

@@ -1,4 +1,17 @@
 extends ../../layouts/default.pug
+include ../../mixins/box-head 
 block main
-    h1  Trang san pham
+    .container.my-3 
+        .row 
+            .col-12 
+                +box-head("Danh sách sản phẩm")
+        .row    
+            .col-4.mb-3 
+                .product-item
+                    img(src="https://cdn.dummyjson.com/product-images/1/thumbnail.jpg", alt="")
+                .inner-content
+                    h3.inner-title Iphone 9
+                    .inner-price-new 80$
+                    .inner-price-old 100$
+                    .inner-discount -20$
         
