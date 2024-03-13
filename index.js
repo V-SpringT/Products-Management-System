@@ -1,6 +1,12 @@
 const express = require('express');
-require('dotenv').config();
+require('dotenv').config(); 
+
+const mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost:27017/Products-Management")
+
 const route = require('./routes/client/index.route.js');
+
+
 
 const app = express();
 const port = process.env.PORT;
