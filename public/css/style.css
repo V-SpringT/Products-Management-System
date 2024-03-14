@@ -53,10 +53,12 @@
         margin-top: 20px;
         border: 1px solid #EEEEEE;
     }
+    .container.my-3 .row .col-4.mb-3 .product-item{
+        aspect-ratio: 4/3;
+    }
     .container.my-3 .row .col-4.mb-3 .product-item img{
         object-fit: cover;
-        width: 100%;
-        
+        height: 100%;
     }
     .container.my-3 .row .col-4.mb-3 .inner-content {
         margin: 10px 10px;
