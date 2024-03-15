@@ -40,11 +40,20 @@ module.exports.index = async (req,res)=>{
         find.status = req.query.status
     }
     
+    let keyword = "";
+
+    if(req.query.keyword){
+        keyword = req.query.keyword;
+
+        const regrex = new RegExp(keyword,"i");
+        find.title = regrex;
+    }
     const products = await Product.find(find);
 
     res.render("admin/page/products/index.pug",{
         pageTitle: "Trang san pham",
         products: products,
-        filterStatus: filterStatus
+        filterStatus: filterStatus,
+        keyword: keyword
     });
 }
