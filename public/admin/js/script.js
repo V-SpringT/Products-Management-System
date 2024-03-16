@@ -9,6 +9,7 @@ if(buttonStatus.length > 0){
             
             if(status){
                 url.searchParams.set("status",status)
+                url.searchParams.set("page",1)
             }
             else{
                 url.searchParams.delete("status")
@@ -29,6 +30,7 @@ if(formSearch){
         const keyword = e.target.elements.keyword.value;
         if(keyword){
             url.searchParams.set("keyword",keyword)
+            url.searchParams.set("page",1)
         }
         else{
             url.searchParams.delete("keyword");
@@ -49,7 +51,7 @@ if(formSearch){
                 const page = button.getAttribute("button-pagination")
                 url.searchParams.set("page",page);
 
-                window.location.href = url.href;
+                window.location.href = url.href; 
             })
         });
     }

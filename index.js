@@ -2,6 +2,10 @@
 const express = require('express');
 const app = express();
 
+// import method-override 
+const methodOverride = require('method-override')
+app.use(methodOverride('_method'))
+
 //import .evn
 require('dotenv').config(); 
 const port = process.env.PORT;
