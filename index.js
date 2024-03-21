@@ -1,3 +1,5 @@
+
+
 //import express
 const express = require('express');
 const app = express();
@@ -5,6 +7,10 @@ const app = express();
 // import method-override 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
+
+// import body parser
+const  bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: false}))
 
 //import .evn
 require('dotenv').config(); 

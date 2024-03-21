@@ -7,7 +7,11 @@ mixin pagination(pagination)
                         class="page-link"
                         button-pagination= pagination.currentPage-1
                         ) Trang trước 
-            
+            //- - var st = pagination.currentPage - 1 
+            //- - var en = pagination.currentPage + 1
+
+
+
             - for(var i=1;i<=pagination.totalPage;i+=1)
                 li(class= `page-item ${pagination.currentPage == i ? "active" : ""}` )
                     button(
