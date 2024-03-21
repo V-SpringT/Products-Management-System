@@ -3,8 +3,10 @@ include ../../mixins/filterStatus.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi
+include ../../mixins/Alert
 
 block main
+    +alert-success("5000")
     h1 Danh sách sản phẩm
 
     .card.mb-3
@@ -32,11 +34,12 @@ block main
                                     name= "checkall"
                                 )
                             th STT 
-                            th Hinh anh 
-                            th Tieu de 
-                            th Gia 
-                            th Trang thai 
-                            th Hanh dong 
+                            th Hình ảnh
+                            th Tiêu đề
+                            th Giá
+                            th Vị trí
+                            th Trạng thái 
+                            th Hành động
 
                     tbody 
                         each item,index in products   
@@ -53,6 +56,14 @@ block main
                                 td #{item.title}
                                 td #{item.price}$ 
                                 td 
+                                    input(
+                                        type="number",
+                                        value= item.position,
+                                        style="width: 60px",
+                                        min="1",
+                                        name="position"
+                                    )
+                                td 
                                     if(item.status == "active")
                                         a(
                                             href= `javascript:;` 
@@ -60,7 +71,7 @@ block main
                                             data-id = item.id 
                                             button-change-status=""
                                             class="badge text-bg-success" 
-                                            text-decoration= "none"
+                                            style="text-decoration: none"
                                         ) hoat dong
                                     else
                                         a(
@@ -69,7 +80,7 @@ block main
                                             data-id = item.id 
                                             button-change-status=""
                                             class="badge text-bg-danger" 
-                                            text-decoration= "none"
+                                            style="text-decoration: none"
                                         ) Dung hoat dong
                                 td  
                                     button(class="btn btn-warning btn-sm") Sua 

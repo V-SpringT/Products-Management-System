@@ -94,6 +94,18 @@ if(formChangeMulti){
         const checkboxMulti = document.querySelector("[checkbox-multi]");
         const inputsChecked = checkboxMulti.querySelectorAll("input[name='id']:checked")
 
+        const typeChange = e.target.elements.type.value;
+        
+        if(typeChange == "delete-all"){
+            const isConfirm = confirm("Bạn có muốn xóa những sản phầm này");
+
+            if(!isConfirm){
+                return;
+            }
+        }
+
+        
+
         if(inputsChecked.length > 0){
             let ids = [];
             
@@ -101,8 +113,15 @@ if(formChangeMulti){
 
             inputsChecked.forEach(inp => {
                 const id = inp.value
-                ids.push(id);
+                if(typeChange == "change-position"){
+                    const position = inp.closest("tr").querySelector("input[name='position']").value
+                    ids.push(`${id}-${position}`)
+                }
+                else {
+                    ids.push(id);
+                }
             })
+                
             inputIDs.value = ids.join(", ")
 
             formChangeMulti.submit();
@@ -113,3 +132,19 @@ if(formChangeMulti){
 }
 
 // End form multi 
+
+
+// Show alert 
+const showAlert = document.querySelector("[show-alert]")
+if(showAlert){
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    const closeALert = showAlert.querySelector("[close-alert]");
+    setTimeout(()=>{
+        showAlert.classList.add("alert-hidden");
+    },time)
+    
+    closeALert.addEventListener("click",()=>{
+        showAlert.classList.add("alert-hidden");
+    })
+}
+// End show Alert 

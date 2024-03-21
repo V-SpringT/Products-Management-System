@@ -1,5 +1,4 @@
 
-
 //import express
 const express = require('express');
 const app = express();
@@ -11,6 +10,17 @@ app.use(methodOverride('_method'))
 // import body parser
 const  bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}))
+
+// import cookie-parser and express-session 
+const cookieParser = require("cookie-parser");
+const session = require("express-session")
+
+//import express-flash // noitification
+const flash = require("express-flash")
+app.use(cookieParser('keyboard cat')); // install cookieParser
+app.use(session({ cookie: { maxAge: 60000 }}));// install express session
+app.use(flash());
+
 
 //import .evn
 require('dotenv').config(); 
