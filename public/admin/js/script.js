@@ -6,7 +6,6 @@ if(buttonStatus.length > 0){
     buttonStatus.forEach(button => {
         button.addEventListener("click", ()=>{
             const status = button.getAttribute("button-status");
-            
             if(status){
                 url.searchParams.set("status",status)
                 url.searchParams.set("page",1)
@@ -19,6 +18,7 @@ if(buttonStatus.length > 0){
     });
 }
 // End Button Status 
+
 
 // form search 
 const formSearch = document.getElementById("form-search")

@@ -14,6 +14,11 @@ module.exports = (query) => {
             name: "Dừng họat động",
             status: "inactive",
             class: ""
+        },
+        {
+            name: "Đã xóa",
+            status: "deleted",
+            class: ""
         }
     ]
     

@@ -20,8 +20,14 @@ block main
     .card.mb-3
         .card-header Danh sách sản phẩm
             .card-body
-                +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-                         
+                .row 
+                    .col-8 
+                        +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`,find)
+                    .col-4
+                        a(
+                            href=`${prefixAdmin}/products/create`
+                            class="btn btn-outline-success"
+                        ) + Thêm mới
                 table(
                     class="table table-hover table-sm"
                     checkbox-multi
@@ -64,7 +70,7 @@ block main
                                         name="position"
                                     )
                                 td 
-                                    if(item.status == "active")
+                                    if item.status == "active"
                                         a(
                                             href= `javascript:;` 
                                             data-status= item.status
@@ -72,8 +78,10 @@ block main
                                             button-change-status=""
                                             class="badge text-bg-success" 
                                             style="text-decoration: none"
-                                        ) hoat dong
-                                    else
+                                        ) hoạt động
+
+                                    
+                                    else 
                                         a(
                                             href="javascript:;" 
                                             data-status= item.status
@@ -81,14 +89,15 @@ block main
                                             button-change-status=""
                                             class="badge text-bg-danger" 
                                             style="text-decoration: none"
-                                        ) Dung hoat dong
+                                        ) Dừng hoạt động
+                                    
                                 td  
-                                    button(class="btn btn-warning btn-sm") Sua 
-                                    button(
-                                        class="btn btn-danger btn-sm ml-1"
-                                        data-id=item.id
-                                        btn-delete
-                                    ) Xoa
+                                    button(class="btn btn-warning btn-sm") Sửa 
+                                    if(find.deleted)
+                                        button(class="btn btn-success btn-sm" btn-restore data-id = item.id) Khôi phục 
+                                    
+                                    else 
+                                        button(class="btn btn-danger btn-sm" btn-delete data-id= item.id) Xóa 
 
     +pagination(pagination)
     form(
@@ -103,5 +112,11 @@ block main
         id="form-delete-item" 
         data-path=`${prefixAdmin}/products/delete`
     ) 
+    form(
+        action=``
+        method="POST"
+        id="form-restore-item"
+        data-path=`${prefixAdmin}/products/restore`
+    )
     script(src="/admin/js/product.js") 
     script(src="/admin/js/script.js")

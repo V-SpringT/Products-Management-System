@@ -41,3 +41,25 @@ if(buttonDelete.length > 0){
 }
 
 // End Delete Item 
+
+// Restore Item
+const buttonRestore = document.querySelectorAll("[btn-restore]")   
+if(buttonRestore.length > 0){
+    const formRestoreItem = document.querySelector("#form-restore-item")
+    const pathRestore = formRestoreItem.getAttribute("data-path")
+    
+    buttonRestore.forEach(btn => {
+        btn.addEventListener("click",()=>{
+            const isConfirm = confirm("Bạn muốn khôi phục sản phẩm này")
+            if(isConfirm){
+                const id = btn.getAttribute("data-id")
+                const action = `/${pathRestore}/${id}?_method=PATCH`
+                
+                formRestoreItem.action = action;
+                formRestoreItem.submit()
+            }
+        })
+    })
+}
+
+// End Restore Item

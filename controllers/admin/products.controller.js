@@ -3,6 +3,7 @@ const Product = require("../../model/products.model");
 const filterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search");
 const paginationHelper = require("../../helper/pagination");
+const systemConfig = require("../../config/system");
  
 module.exports.index = async (req,res)=>{
 
@@ -14,10 +15,18 @@ module.exports.index = async (req,res)=>{
     }
 
     if(req.query.status){
-        find.status = req.query.status
+        if(req.query.status == "deleted"){
+            find.deleted = true
+        }
+        else{
+            find.status = req.query.status
+        }
     }
     // End Filter
     
+    
+
+
     // Search
     
     const searchObject = searchHelper(req.query);
@@ -44,7 +53,8 @@ module.exports.index = async (req,res)=>{
         products: products,
         filterStatus: filterStatus,
         keyword: searchObject.keyword,
-        pagination: paginationObject
+        pagination: paginationObject,
+        find: find
     });
 
     // End Query Data 
@@ -75,6 +85,7 @@ module.exports.changeMulti = async (req,res) => {
             req.flash("success",`Cập nhật trạng thái thành công ${ids.length} sản phẩm`)
             break;
         case "delete-all":
+            console.log("success")
             await Product.updateMany(
                 {_id: {$in: ids}},
                 {
@@ -83,6 +94,7 @@ module.exports.changeMulti = async (req,res) => {
                 }
             )
             req.flash("success",`Xóa thành công ${ids.length} sản phẩm`)
+            break
         case "change-position":
             for (const item of ids) {
                 let [id,pos] = item.split("-");
@@ -111,4 +123,49 @@ module.exports.deleteItem = async (req,res) => {
     req.flash("success",`Xóa thành công sản phẩm`)
 
     res.redirect('back')
+}
+
+// [PATCH] /admin/products/restore/:id
+
+module.exports.restoreItem = async (req,res) =>{
+    console.log(req.params)
+    const id = req.params.id;
+    await Product.updateOne(
+        {_id: id},
+        {
+            deleted: false,
+            $unset : {
+                deletedTime: 1
+            }
+        }
+    )
+    req.flash("success",`Khôi phục thành công sản phẩm`)
+    res.redirect('back')
+}
+
+// [GET] /admin/products/create
+module.exports.create = async (req,res) =>{
+    res.render("admin/page/products/create",{
+        pageTitle: "Thêm mới sản phẩm"
+    })
+
+}
+// [POST] /admin/products/create
+module.exports.createPost = async (req,res) => {
+    req.body.price = parseInt(req.body.price)
+    req.body.discountPercentage = parseFloat(req.body.discountPercentage)
+    req.body.stock = parseInt(req.body.stock)
+
+    if(isNaN(req.body.positon)){
+        const counter = await Product.countDocuments()
+        req.body.position = parseInt(counter + 1)
+    }
+    else{
+        req.body.position = parseInt(req.body.positon)
+    }
+    console.log(req.body)
+    const product = new Product(req.body)
+    await product.save();
+
+    res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
