@@ -43,7 +43,10 @@ routeAdmin(app)
 // static public folder
 app.use(express.static("public"))
 
+// import multer # upload image
 
+const multer  = require('multer')
+const upload = multer({ dest: './public/uploads/' })
 
 //pug 
 app.set("views","./views");

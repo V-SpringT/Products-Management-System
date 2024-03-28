@@ -92,7 +92,10 @@ block main
                                         ) Dừng hoạt động
                                     
                                 td  
-                                    button(class="btn btn-warning btn-sm") Sửa 
+                                    a(
+                                        class="btn btn-warning btn-sm"
+                                        href=`${prefixAdmin}/products/edit/${item.id}`
+                                    ) Sửa 
                                     if(find.deleted)
                                         button(class="btn btn-success btn-sm" btn-restore data-id = item.id) Khôi phục 
                                     
