@@ -18,7 +18,7 @@ const session = require("express-session")
 //import express-flash // noitification
 const flash = require("express-flash")
 app.use(cookieParser('keyboard cat')); // install cookieParser
-app.use(session({ cookie: { maxAge: 60000 }}));// install express session
+app.use(session({cookie: { maxAge: 60000 }}));// install express session
 app.use(flash());
 
 
