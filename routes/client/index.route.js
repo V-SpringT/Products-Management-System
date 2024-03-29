@@ -5,6 +5,6 @@ module.exports = (app)=>{
     
     app.use('/',homeRoutes);
 
-    app.use('/',productRoutes); // gan /product sang vi ban dau la /product r
+    app.use('/products',productRoutes); // gan /product sang vi ban dau la /product r
      
 }

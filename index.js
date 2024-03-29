@@ -41,7 +41,7 @@ const routeAdmin = require('./routes/admin/index.route.js');
 routeAdmin(app)
 
 // static public folder
-app.use(express.static("public"))
+app.use(express.static(`${__dirname}/public`))
 
 // import multer # upload image
 
@@ -49,7 +49,7 @@ const multer  = require('multer')
 const upload = multer({ dest: './public/uploads/' })
 
 //pug 
-app.set("views","./views");
+app.set("views",`${__dirname}/views`);
 app.set("view engine","pug");
 
 // App local variable

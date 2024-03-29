@@ -1,9 +1,9 @@
 // [GET] /products
 
-const product = require("../../model/products.model");
+const Product = require("../../model/products.model");
 
 module.exports.index = async (req,res)=>{
-    const products = await product.find({
+    const products = await Product.find({
         status: "active",
         deleted: false
     }).sort({position: "desc"});
@@ -18,5 +18,27 @@ module.exports.index = async (req,res)=>{
         products: newProducts
     });
 
+
+}
+
+
+module.exports.detail = async (req,res)=>{
+    try{
+        const slug = req.params.slug
+        const find = {
+            deleted: false,
+            status: 'active',
+            slug: slug
+        }
+
+        const product = await Product.findOne(find)
+        res.render("client/page/product/detail",{
+            pageTitle: "Trang chi tiết sản phẩm",
+            product: product
+        });
+    }
+    catch(error){
+        res.redirect('/products')
+    }
 
 }
