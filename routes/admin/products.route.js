@@ -1,7 +1,10 @@
 const express = require('express')
+
 const multer  = require('multer')
-const storageMulter = require('../../helper/storageMulter')
-const upload = multer({ storage: storageMulter() })
+// const storageMulter = require('../../helper/storageMulter') store upload folder
+const upload = multer()
+
+const uploadCloud = require("../../middlewares/admin/ulpoadCloud.middleware")
 
 const router = express.Router(); 
 
@@ -23,6 +26,7 @@ router.get("/create", controller.create);
 router.post(
     "/create",
     upload.single('thumbnail'), 
+    uploadCloud.upload,
     validate.createPost,
     controller.createPost
     )
