@@ -43,9 +43,20 @@ module.exports.index = async (req,res)=>{
 
     // End Pagination 
 
+    //sort
+    let sort = {};
+
+    if(req.query.sortKey && req.query.sortValue){
+        sort[req.query.sortKey] = req.query.sortValue;
+    }
+    else{
+        sort["position"] ="desc"
+    }
+    //end sort
+
     // Query data
     const products = await Product.find(find)
-    .sort({position: "desc"})
+    .sort(sort)
     .limit(paginationObject.limitItem)
     .skip(paginationObject.skip);
     res.render("admin/page/products/index.pug",{
