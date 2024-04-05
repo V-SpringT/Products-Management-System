@@ -55,6 +55,11 @@ app.set("view engine","pug");
 // App local variable
 const systemConfig = require("./config/system")
 app.locals.prefixAdmin = systemConfig.prefixAdmin
+
 app.listen(port,()=>{
     console.log(`Example app listening on port ${port}`);
 });
+
+// tinymce . text editer
+const path = require('path');
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
