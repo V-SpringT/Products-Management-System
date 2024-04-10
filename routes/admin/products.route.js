@@ -19,8 +19,6 @@ router.patch("/change-multi",controller.changeMulti);
 
 router.delete("/delete/:id",controller.deleteItem)
 
-router.patch("/restore/:id",controller.restoreItem)
-
 router.get("/create", controller.create);
 
 router.post(
@@ -30,6 +28,10 @@ router.post(
     validate.createPost,
     controller.createPost
     )
+
+router.get("/deleted-products", controller.deletedProducts);
+
+router.post("/deleted-products/restore/:id", controller.restore)
 
 router.get("/edit/:id", controller.edit)
 

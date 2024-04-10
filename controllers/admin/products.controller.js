@@ -15,12 +15,7 @@ module.exports.index = async (req,res)=>{
     }
 
     if(req.query.status){
-        if(req.query.status == "deleted"){
-            find.deleted = true
-        }
-        else{
-            find.status = req.query.status
-        }
+        find.status = req.query.status
     }
     // End Filter
     
@@ -64,8 +59,7 @@ module.exports.index = async (req,res)=>{
         products: products,
         filterStatus: filterStatus,
         keyword: searchObject.keyword,
-        pagination: paginationObject,
-        find: find
+        pagination: paginationObject
     });
 
     // End Query Data 
@@ -128,6 +122,7 @@ module.exports.deleteItem = async (req,res) => {
         { _id: id},
         {
             deleted: true,
+            status: "inactive",
             deletedTime: new Date()
         }
     );
@@ -136,23 +131,6 @@ module.exports.deleteItem = async (req,res) => {
     res.redirect('back')
 }
 
-// [PATCH] /admin/products/restore/:id
-
-module.exports.restoreItem = async (req,res) =>{
-    console.log(req.params)
-    const id = req.params.id;
-    await Product.updateOne(
-        {_id: id},
-        {
-            deleted: false,
-            $unset : {
-                deletedTime: 1
-            }
-        }
-    )
-    req.flash("success",`Khôi phục thành công sản phẩm`)
-    res.redirect('back')
-}
 
 // [GET] /admin/products/create
 module.exports.create = async (req,res) =>{
@@ -181,11 +159,45 @@ module.exports.createPost = async (req,res) => {
 
     res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
+// [GET] /admin/products/deleted-products
+module.exports.deletedProducts = async (req,res) =>{
+    const find = {
+        deleted: true
+    }
+    //pagination
+    const countProducts = await Product.countDocuments(find);
+    const paginationObject = paginationHelper(countProducts, req.query);
+    //end pagination
+    const deletedProducts = await Product
+    .find(find)
+    .sort({position: "desc"})
+    .limit(paginationObject.limitItem)
+    .skip(paginationObject.skip);
 
+    res.render("admin/page/products/deleted",{
+        pageTitle: "Sản phẩm đã xóa",
+        products: deletedProducts,
+        pagination: paginationObject
+    })
+}
+// [POST] /admin/products/deleted-products/restore/:id
+module.exports.restore = async (req,res) => {
+    try{
+        await Product.updateOne({
+            _id: req.params.id  
+        },{
+            deleted: false
+        })
+        req.flash("success",`Khôi phục sản phẩm thành công`)
+    }catch(err){
+        req.flash("error",`Khôi phục sản phẩm thất bại`)
+    }
+    
+    res.redirect("back")
+}
 //[GET] /admin/products/edit/:id
 
 module.exports.edit = async (req,res) => {
-
     try{
         const find = {
             deleted: false,

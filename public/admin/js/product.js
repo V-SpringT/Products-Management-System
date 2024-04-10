@@ -46,6 +46,7 @@ if(buttonDelete.length > 0){
 const buttonRestore = document.querySelectorAll("[btn-restore]")   
 if(buttonRestore.length > 0){
     const formRestoreItem = document.querySelector("#form-restore-item")
+    console.log(formRestoreItem)
     const pathRestore = formRestoreItem.getAttribute("data-path")
     
     buttonRestore.forEach(btn => {
@@ -53,7 +54,7 @@ if(buttonRestore.length > 0){
             const isConfirm = confirm("Bạn muốn khôi phục sản phẩm này")
             if(isConfirm){
                 const id = btn.getAttribute("data-id")
-                const action = `${pathRestore}/${id}?_method=PATCH`
+                const action = `${pathRestore}/${id}?_method=POST`
                 
                 formRestoreItem.action = action;
                 formRestoreItem.submit()
@@ -62,4 +63,4 @@ if(buttonRestore.length > 0){
     })
 }
 
-// End Restore Item
+//End Restore Item

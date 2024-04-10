@@ -10,13 +10,14 @@
     font-size: 24px;
     font-weight: 700;
     color: #fff;
+    text-decoration: none;
 }
 
 /* End Header  */
 
 /* Body  */
 .body .sider{
-    width: 150px;
+    width: 200px;
     background-color: #323232;
     color: #fff;
     height: calc(100vh - 56px);
@@ -27,8 +28,8 @@
 .body .main{
     margin: 15px;
     position: relative;
-    left: 150px;
-    width: calc(100% - 180px);
+    left: 200px;
+    width: calc(100% - 230px);
 }
 /* End Body  */
 
