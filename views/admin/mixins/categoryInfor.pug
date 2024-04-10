@@ -8,7 +8,7 @@ mixin category-infor(categorys,level=1)
                     name = "id"
                     value = item.id
                 )
-            td #{index+1}
+            td #{item.index}
             //- td  #{pagination.skip+index+1} 
             td 
                 img(src=item.thumbnail, alt=item.title, width= "100px", height= "auto")

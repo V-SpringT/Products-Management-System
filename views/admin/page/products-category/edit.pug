@@ -4,10 +4,10 @@ include ../../mixins/select-tree
 block main 
     +alert-error(5000)
 
-    h1(class="mb-4") Thêm mới danh mục
+    h1(class="mb-4") Sửa thông tin danh mục
 
     form(
-        action=`${prefixAdmin}/products-category/create`
+        action=`${prefixAdmin}/products-category/edit/${category.id}?_method=PATCH`
         method="POST"
         enctype="multipart/form-data"
     ) 
@@ -15,6 +15,7 @@ block main
             label(for="title") Tiêu đề
             input(
                 type="text"
+                value=category.title
                 class="form-control"
                 id="title"
                 name="title"
@@ -29,7 +30,7 @@ block main
             ) 
                 option(value="") -- Chọn danh mục cha --
                 if(categorys)
-                    +select-tree(categorys)
+                    +select-tree(categorys,1,category.parent_id)
 
         div(class="form-group")
             label(for="desc") Mô tả
@@ -38,7 +39,7 @@ block main
                 id="desc"
                 name="description"
                 rows="5"
-            )
+            ) #{category.description}
         div(
             class="form-group"
             upload-image
@@ -54,7 +55,7 @@ block main
                 upload-image-input
             )
             img(
-                src=""
+                src=category.thumbnail
                 alt=""
                 upload-image-preview
                 class="image-preview"
@@ -68,6 +69,7 @@ block main
                 name="position"
                 placeholder="Tự động tăng"
                 min="1"
+                value=category.position
             )
         div(class="form-group form-check form-check-inline")
             input(
@@ -76,7 +78,7 @@ block main
                 id="statusActive"
                 name="status"
                 value="active"
-                checked
+                checked=(category.status == "active" ? true : false)
             ) 
             label(for="statusActive" class="form-check-label") Hoạt động
         div(class="form-group form-check form-check-inline")
@@ -86,11 +88,12 @@ block main
                 id="statusInactive"
                 name="status"
                 value="inactive"
+                checked = (category.status == "inactive" ? true : false)
             ) 
             label(for="statusInactive" class="form-check-label") Dừng hoạt động
         div(class="form-group")
             button(
                 type="submit"
                 class="btn btn-primary"
-            ) Tạo mới
+            ) Sửa
     script(src="/admin/js/products-category.js")
