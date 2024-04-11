@@ -204,9 +204,10 @@ module.exports.restore = async (req,res) => {
     res.redirect("back")
 }
 //[GET] /admin/products/edit/:id
-
 module.exports.edit = async (req,res) => {
     try{
+        const categorys = await productsCategory.find({deleted: false})
+        const categorysTree = createTreeHelper.tree(categorys,"")
         const find = {
             deleted: false,
             _id: req.params.id
@@ -217,7 +218,8 @@ module.exports.edit = async (req,res) => {
     
         res.render("admin/page/products/edit",{
             pageTitle: "Sửa thông tin sản phẩm",
-            product: product
+            product: product,
+            categorys: categorysTree
         })
     }
     catch(error){
