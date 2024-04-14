@@ -8,120 +8,138 @@ include ../../mixins/sort
 
 block main
     +alert-success("5000")
-    h1 Danh sách sản phẩm
+    if(roleMDW.permissions.includes("products_view"))
+        h1 Danh sách sản phẩm
 
-    .card.mb-3
-        .card-header Bộ lọc và tìm kiếm
-            .card-body
-                .row
-                    .col-4
-                        +filter-status(filterStatus)
-                    .col-4
-                        +sort()
-                    .col-4
-                        +search(keyword)
-    .card.mb-3
-        .card-header Danh sách sản phẩm
-            .card-body
-                .row 
-                    .col-8
-                        +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-                    .col-2
-                        a(
-                            href=`${prefixAdmin}/products/deleted-products`
-                            class="btn btn-outline-danger"
-                        ) - Đã Xóa
-                    .col-2
-                        a(
-                            href=`${prefixAdmin}/products/create`
-                            class="btn btn-outline-success"
-                        ) + Thêm mới
-                table(
-                    class="table table-hover table-sm"
-                    checkbox-multi
-                )
-                    thead 
-                        tr 
-                            th
-                                input(
-                                    type= "checkbox"
-                                    name= "checkall"
-                                )
-                            th STT 
-                            th Hình ảnh
-                            th Tiêu đề
-                            th Giá
-                            th Vị trí
-                            th Trạng thái 
-                            th Hành động
-
-                    tbody 
-                        each item,index in products   
+        .card.mb-3
+            .card-header Bộ lọc và tìm kiếm
+                .card-body
+                    .row
+                        .col-4
+                            +filter-status(filterStatus)
+                        .col-4
+                            +sort()
+                        .col-4
+                            +search(keyword)
+        .card.mb-3
+            .card-header Danh sách sản phẩm
+                .card-body
+                    .row 
+                        .col-8
+                            if(roleMDW.permissions.includes("products_edit"))
+                                +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+                        .col-2
+                            a(
+                                href=`${prefixAdmin}/products/deleted-products`
+                                class="btn btn-outline-danger"
+                            ) - Đã Xóa
+                        .col-2
+                            if(roleMDW.permissions.includes("products_create"))
+                                a(
+                                    href=`${prefixAdmin}/products/create`
+                                    class="btn btn-outline-success"
+                                ) + Thêm mới
+                    table(
+                        class="table table-hover table-sm"
+                        checkbox-multi
+                    )
+                        thead 
                             tr 
-                                td 
+                                th
                                     input(
-                                        type = "checkbox"
-                                        name = "id"
-                                        value = item.id
+                                        type= "checkbox"
+                                        name= "checkall"
                                     )
-                                td  #{pagination.skip+index+1} 
-                                td 
-                                    img(src=item.thumbnail, alt=item.title, width= "100px", height= "auto")
-                                td #{item.title}
-                                td #{item.price}$ 
-                                td 
-                                    input(
-                                        type="number",
-                                        value= item.position,
-                                        style="width: 60px",
-                                        min="1",
-                                        name="position"
-                                    )
-                                td 
-                                    if item.status == "active"
-                                        a(
-                                            href= `javascript:;` 
-                                            data-status= item.status
-                                            data-id = item.id 
-                                            button-change-status=""
-                                            class="badge text-bg-success" 
-                                            style="text-decoration: none"
-                                        ) hoạt động
+                                th STT 
+                                th Hình ảnh
+                                th Tiêu đề
+                                th Giá
+                                th Vị trí
+                                th Trạng thái 
+                                th Hành động
 
-                                    
-                                    else 
-                                        a(
-                                            href="javascript:;" 
-                                            data-status= item.status
-                                            data-id = item.id 
-                                            button-change-status=""
-                                            class="badge text-bg-danger" 
-                                            style="text-decoration: none"
-                                        ) Dừng hoạt động
-                                    
-                                td  
-                                    a(
-                                        class="btn btn-secondary btn-sm"
-                                        href=`${prefixAdmin}/products/detail/${item.id}`
-                                    ) Chi tiết 
-                                    a(
-                                        class="btn btn-warning btn-sm"
-                                        href=`${prefixAdmin}/products/edit/${item.id}`
-                                    ) Sửa 
-                                    button(class="btn btn-danger btn-sm" btn-delete data-id= item.id) Xóa 
+                        tbody 
+                            each item,index in products   
+                                tr 
+                                    td 
+                                        input(
+                                            type = "checkbox"
+                                            name = "id"
+                                            value = item.id
+                                        )
+                                    td  #{pagination.skip+index+1} 
+                                    td 
+                                        img(src=item.thumbnail, alt=item.title, width= "100px", height= "auto")
+                                    td #{item.title}
+                                    td #{item.price}$ 
+                                    td 
+                                        input(
+                                            type="number",
+                                            value= item.position,
+                                            style="width: 60px",
+                                            min="1",
+                                            name="position"
+                                        )
+                                    td 
+                                        if(roleMDW.permissions.includes("products_edit"))
+                                            if item.status == "active"
+                                                a(
+                                                    href= `javascript:;` 
+                                                    data-status= item.status
+                                                    data-id = item.id 
+                                                    button-change-status=""
+                                                    class="badge text-bg-success" 
+                                                    style="text-decoration: none"
+                                                ) hoạt động
 
-    +pagination(pagination)
-    form(
-        action=``
-        method="POST"
-        id="form-change-status" 
-        data-path=`${prefixAdmin}/products/change-status`
-    ) 
-    form(
-        action=``
-        method="POST"
-        id="form-delete-item" 
-        data-path=`${prefixAdmin}/products/delete`
-    ) 
+                                            
+                                            else 
+                                                a(
+                                                    href="javascript:;" 
+                                                    data-status= item.status
+                                                    data-id = item.id 
+                                                    button-change-status=""
+                                                    class="badge text-bg-danger" 
+                                                    style="text-decoration: none"
+                                                ) Dừng hoạt động
+                                        else
+                                            if item.status == "active"
+                                                a(
+                                                    class="badge text-bg-success" 
+                                                    style="text-decoration: none"
+                                                ) hoạt động
+
+                                            
+                                            else 
+                                                a(
+                                                    class="badge text-bg-danger" 
+                                                    style="text-decoration: none"
+                                                ) Dừng hoạt động
+                                    td  
+                                        a(
+                                            class="btn btn-secondary btn-sm"
+                                            href=`${prefixAdmin}/products/detail/${item.id}`
+                                        ) Chi tiết 
+                                        if(roleMDW.permissions.includes("products_edit"))
+                                            a(
+                                                class="btn btn-warning btn-sm"
+                                                href=`${prefixAdmin}/products/edit/${item.id}`
+                                            ) Sửa 
+                                        if(roleMDW.permissions.includes("products_delete"))
+                                            button(class="btn btn-danger btn-sm" btn-delete data-id= item.id) Xóa 
+
+        +pagination(pagination)
+        form(
+            action=``
+            method="POST"
+            id="form-change-status" 
+            data-path=`${prefixAdmin}/products/change-status`
+        ) 
+        form(
+            action=``
+            method="POST"
+            id="form-delete-item" 
+            data-path=`${prefixAdmin}/products/delete`
+        ) 
     script(src="/admin/js/product.js") 
     script(src="/admin/js/script.js")

@@ -3,9 +3,15 @@ const Account = require("../../model/accounts.model")
 const md5 = require('md5')
 // [GET] /admin/auth/login
 module.exports.index = async (req,res)=>{
-    res.render("admin/page/auth/login.pug",{
-        pageTitle: "Trang đăng nhập",
-    });
+    if(req.cookies.token){
+        res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
+    }
+    else{
+        res.render("admin/page/auth/login.pug",{
+            pageTitle: "Trang đăng nhập",
+        });
+    }
+    
 }
 // [POST] /admin/auth/login
 module.exports.indexPost = async (req,res)=>{
@@ -35,4 +41,9 @@ module.exports.indexPost = async (req,res)=>{
     }
     res.cookie("token", user.token)
    res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
+}
+// [GET] /admin/auth/logout
+module.exports.logout = async (req,res)=>{
+    res.clearCookie("token")
+    res.redirect(`${systemConfig.prefixAdmin}/auth/login`)
 }

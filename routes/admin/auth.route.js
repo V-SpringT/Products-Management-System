@@ -10,4 +10,6 @@ router.post(
     validate.loginPost,
     controller.indexPost
 );
+
+router.get("/logout", controller.logout)
 module.exports = router;

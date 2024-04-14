@@ -46,14 +46,16 @@ mixin category-infor(categorys,level=1)
                     class="btn btn-secondary btn-sm"
                     href=`${prefixAdmin}/products-category/detail/${item.id}`
                 ) Chi tiết 
-                a(
-                    class="btn btn-warning btn-sm"
-                    href=`${prefixAdmin}/products-category/edit/${item.id}`
-                ) Sửa                  
-                button(
-                    class="btn btn-danger btn-sm" 
-                    btn-delete 
-                    data-id= item.id
-                ) Xóa
+                if(roleMDW.permissions.includes("products-category_edit"))
+                    a(
+                        class="btn btn-warning btn-sm"
+                        href=`${prefixAdmin}/products-category/edit/${item.id}`
+                    ) Sửa           
+                if(roleMDW.permissions.includes("products-category_delete"))       
+                    button(
+                        class="btn btn-danger btn-sm" 
+                        btn-delete 
+                        data-id= item.id
+                    ) Xóa
         if item.children && item.children.length > 0
             +category-infor(item.children,level+1)
