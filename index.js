@@ -63,3 +63,7 @@ app.listen(port,()=>{
 // tinymce . text editer
 const path = require('path');
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
+//import moment
+const moment = require('moment')
+app.locals.moment = moment

@@ -1,5 +1,5 @@
 extends ../../layout/default.pug 
-
+include ../../mixins/moment.pug
 block main 
     if(product.title)
         h1(class="mb-4") #{product.title}
@@ -41,7 +41,18 @@ block main
 
     if(product.description)
         div(Class="mb-4")  !{product.description}
-    
+
+    if(product.createBy.accountId)
+        div(Class="mb-4") 
+            b Người tạo
+                p #{product.roleCreate.title} #{product.userCreate.fullName} 
+                    +formatDateTime(product.createBy.createdAt) 
+    if(product.updatedBy.length > 0)
+        div(class="mb-4")
+            b Lịch sử cập nhật
+                each update,index in product.userUpdate
+                    p #{update.role.title} #{update.fullName} 
+                        +formatDateTime(product.updatedBy[index].updatedAt)
     a(
         class="btn btn-warning btn-sm"
         href=`${prefixAdmin}/products/edit/${product.id}`
