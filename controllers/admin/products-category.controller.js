@@ -104,3 +104,59 @@ module.exports.editPatch = async (req,res) => {
     
     res.redirect("back")
 }
+//[Delete] /admin/products-category/delete/:id
+module.exports.delete = async (req,res) => {
+    try{
+        const id = req.params.id
+        const deleted = {
+            accountId: id,
+            deletedAt: new Date()
+        }
+        const object = await productsCategory.findOne({_id: id})
+        console.log(object)
+        const children = await productsCategory.find({parent_id: id})
+        console.log(children)
+        for (const child of children) {
+            await productsCategory.updateOne(
+                {_id: child.id},
+                {parent_id: object.parent_id}
+            )
+        }
+        await productsCategory.updateOne(
+            {_id: id},
+            {deleted: true, status: "inactive", parent_id: ""}
+        )
+        req.flash("success", "Xóa danh mục thành công")
+        res.redirect("back")
+    }
+    catch(e){
+        req.flash("error", "Xóa danh mục không thành công")
+        res.redirect("back")
+    }
+}
+
+//[GET] /admin/products-category/deleted-category
+module.exports.deleted = async (req, res) => {
+    const deletedCategory = await productsCategory.find({deleted: true})
+
+    res.render("admin/page/products-category/deleted.pug",{
+        pageTitle: "Danh mục đã xóa",
+        deletedCategory: deletedCategory
+    })
+}
+
+//[POST] /admin/products-category/restore/:id
+module.exports.restore = async (req, res) => {
+    try{
+        const id = req.params.id
+        await productsCategory.updateOne(
+            {_id: id}, {deleted: false}
+        )
+        req.flash("success", "khôi phục danh mục thành công")
+    }
+    catch(e){
+        req.flash("error", "khôi phục danh mục không thành công")
+    }
+    res.redirect("back")
+    
+}

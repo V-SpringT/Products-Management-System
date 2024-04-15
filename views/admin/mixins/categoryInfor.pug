@@ -43,12 +43,12 @@ mixin category-infor(categorys,level=1)
                 
             td  
                 a(
-                    class="btn btn-secondary btn-sm"
+                    class="btn btn-secondary btn-sm me-1"
                     href=`${prefixAdmin}/products-category/detail/${item.id}`
                 ) Chi tiết 
                 if(roleMDW.permissions.includes("products-category_edit"))
                     a(
-                        class="btn btn-warning btn-sm"
+                        class="btn btn-warning btn-sm me-1"
                         href=`${prefixAdmin}/products-category/edit/${item.id}`
                     ) Sửa           
                 if(roleMDW.permissions.includes("products-category_delete"))       
@@ -57,5 +57,6 @@ mixin category-infor(categorys,level=1)
                         btn-delete 
                         data-id= item.id
                     ) Xóa
+
         if item.children && item.children.length > 0
             +category-infor(item.children,level+1)

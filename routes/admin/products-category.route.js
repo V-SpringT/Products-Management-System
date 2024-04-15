@@ -29,5 +29,9 @@ router.patch(
     uploadCloud.upload,
     validate.createPost, controller.editPatch
 )
+router.delete("/delete/:id", controller.delete)
 
+router.get("/deleted-category", controller.deleted)
+
+router.post("/deleted-category/restore/:id", controller.restore)
 module.exports = router;
