@@ -79,6 +79,8 @@ module.exports.editPatch = async (req,res)=>{
     })
     if(emailExist){
         req.flash("error", "Email đã tồn tại")
+        res.redirect("back")
+        return
     }
     else{
         if(req.body.password){
@@ -91,7 +93,8 @@ module.exports.editPatch = async (req,res)=>{
         await Account.updateOne({_id: req.body.id}, req.body)
         
         req.flash("success", "Cập nhật thành công")
-        res.redirect(`${systemConfig.prefixAdmin}/accounts`)
+        res.redirect(`back`)
+        
     }
     
 }

@@ -173,19 +173,12 @@ const sort = document.querySelector("[sort]")
 if(sort){
     let url = new URL(window.location.href)
     const sortSelect = sort.querySelector("[sort-select]")
-    const sortClear = sort.querySelector("[sort-clear]")
     sortSelect.addEventListener("change",(e)=>{
         const [sortKey,sortValue] = e.target.value.split("-")
         url.searchParams.set("sortKey",sortKey)
         url.searchParams.set("sortValue",sortValue)
 
         window.location.href = url.href;
-    })
-    /*Clear button*/
-    sortClear.addEventListener("click",()=>{
-        url.searchParams.delete("sortKey")
-        url.searchParams.delete("sortValue")
-        window.location.href = url.href
     })
 
     /*set value select tag*/

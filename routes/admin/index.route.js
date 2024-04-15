@@ -6,6 +6,7 @@ const productsCategory = require("./products-category.route.js")
 const roles = require("./roles.route.js")
 const accounts = require("./accounts.route.js")
 const auth = require("./auth.route.js")
+const myAccount = require("./my-account.route.js")
 
 const authMiddleware = require("../../middlewares/admin/auth.middleware")
 
@@ -37,4 +38,9 @@ module.exports = (app)=>{
     accounts
     )
     app.use(PATH_ADMIN + "/auth", auth)
+    app.use(
+        PATH_ADMIN + "/my-account", 
+        authMiddleware.requireAuth,
+        myAccount
+    )
 }

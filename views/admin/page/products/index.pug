@@ -24,21 +24,21 @@ block main
         .card.mb-3
             .card-header Danh sách sản phẩm
                 .card-body
-                    .row 
+                    .row.mb-4
                         .col-8
                             if(roleMDW.permissions.includes("products_edit"))
                                 +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-                        .col-2
+                        .col-2.text-center
                             a(
                                 href=`${prefixAdmin}/products/deleted-products`
                                 class="btn btn-outline-danger"
-                            ) - Đã Xóa
-                        .col-2
+                            ) <i class="fa-solid fa-trash"></i> Đã Xóa
+                        .col-2.text-center
                             if(roleMDW.permissions.includes("products_create"))
                                 a(
                                     href=`${prefixAdmin}/products/create`
                                     class="btn btn-outline-success"
-                                ) + Thêm mới
+                                ) <i class="fa-solid fa-file-circle-plus"></i> Thêm mới
                     table(
                         class="table table-hover table-sm"
                         checkbox-multi
@@ -117,18 +117,18 @@ block main
                                                 ) Dừng hoạt động
                                     td  
                                         a(
-                                            class="btn btn-secondary btn-sm"
+                                            class="btn btn-secondary btn-sm me-1"
                                             href=`${prefixAdmin}/products/detail/${item.id}`
                                         ) Chi tiết 
                                         if(roleMDW.permissions.includes("products_edit"))
                                             a(
-                                                class="btn btn-warning btn-sm"
+                                                class="btn btn-warning btn-sm me-1"
                                                 href=`${prefixAdmin}/products/edit/${item.id}`
                                             ) Sửa 
                                         if(roleMDW.permissions.includes("products_delete"))
                                             button(class="btn btn-danger btn-sm" btn-delete data-id= item.id) Xóa 
 
-        +pagination(pagination)
+                    +pagination(pagination)
         form(
             action=``
             method="POST"

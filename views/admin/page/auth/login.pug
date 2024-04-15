@@ -3,10 +3,9 @@ include ../../mixins/Alert
 
 block main
     +alert-error(5000)
-
-    .container.my-5 
+    .container.my-5
         .row.justify-content-center 
-            .col-8 
+            div.col-4
                 h1(class="text-center") Đăng nhập
                 form(
                     action=`${prefixAdmin}/auth/login`
@@ -30,7 +29,7 @@ block main
                             name="password"
                             required
                         )  
-                    div(class="form-group")
+                    div(class="form-group my-2")
                         button(
                             type="submit"
                             class="btn btn-primary btn-block"

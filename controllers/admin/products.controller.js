@@ -94,6 +94,10 @@ module.exports.changeMulti = async (req,res) => {
         accountId: res.locals.userMDW.id,
         updatedAt: new Date()
     }
+    const deleted = {
+        accountId: res.locals.userMDW.id,
+        deletedAt: new Date()
+    }
     switch(type){
         case "active":
             await Product.updateMany({_id: {$in: ids}}, {status: "active",$push: {updatedBy: updated}})
@@ -109,10 +113,7 @@ module.exports.changeMulti = async (req,res) => {
                 {_id: {$in: ids}},
                 {
                     deleted: true,
-                    deletedBy:{
-                        accountId: res.locals.userMDW.id,
-                        deletedAt: new Date()
-                    }
+                    $push: {deletedBy: deleted}
                 }
             )
             req.flash("success",`Xóa thành công ${ids.length} sản phẩm`)
@@ -138,16 +139,16 @@ module.exports.deleteItem = async (req,res) => {
         accountId: res.locals.userMDW.id,
         updatedAt: new Date()
     }
+    const deleted = {
+        accountId: res.locals.userMDW.id,
+        deletedAt: new Date()
+    }
     await Product.updateOne(
         { _id: id},
         {
             deleted: true,
             status: "inactive",
-            deletedBy:{
-                accountId: res.locals.userMDW.id,
-                deletedAt: new Date()
-            },
-            $push: {updatedBy: updated}
+            $push: {deletedBy: deleted},
         }
     );
     req.flash("success",`Xóa thành công sản phẩm`)
@@ -215,10 +216,15 @@ module.exports.deletedProducts = async (req,res) =>{
 // [POST] /admin/products/deleted-products/restore/:id
 module.exports.restore = async (req,res) => {
     try{
+        const restored = {
+            accountId: res.locals.userMDW.id,
+            restoredAt: new Date()
+        }
         await Product.updateOne({
             _id: req.params.id  
         },{
-            deleted: false
+            deleted: false,
+            $push: {restoredBy: restored}
         })
         req.flash("success",`Khôi phục sản phẩm thành công`)
     }catch(err){
@@ -321,8 +327,59 @@ module.exports.detail = async (req,res) => {
                     userUpdate.push(user)
                 }
             }
+            product.userUpdate = userUpdate
         }
-        product.userUpdate = userUpdate
+        //delete person
+        const Delete = product.deletedBy
+        const userDelete = []
+        if(Delete.length > 0){
+            for(const obj of Delete)  {
+                const user = await Account.findOne({
+                    deleted: false,
+                    _id: obj.accountId
+                })
+                if(user){
+                    const role = await Role.findOne({
+                        deleted: false, 
+                        _id : user.role_id
+                    })
+                    if(role){
+                        console.log(role)
+                        user.role = role
+                    }
+                    userDelete.push(user)
+                }
+            }
+        }
+        console.log(userDelete)
+        product.userDelete = userDelete
+
+        // restore person
+        const Restore = product.restoredBy
+        const userRestore= []
+        if(Restore.length > 0){
+            for(const obj of Restore)  {
+                const user = await Account.findOne({
+                    deleted: false,
+                    _id: obj.accountId
+                })
+                if(user){
+                    const role = await Role.findOne({
+                        deleted: false, 
+                        _id : user.role_id
+                    })
+                    if(role){
+                        user.role = role
+                    }
+                    userRestore.push(user)
+                }
+            }
+        }
+        // console.log(userRestore)
+        product.userRestore = userRestore
+
+        //end
+        
         res.render("admin/page/products/detail",{
             pageTitle: product.title,
             product: product

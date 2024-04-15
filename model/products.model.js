@@ -42,11 +42,20 @@ const productSchema = new mongoose.Schema(
                 accountId: String,
                 updatedAt: Date
             }
-        ]
+        ],
+        deletedBy:[
+            {
+                accountId: String,
+                deletedAt: Date
+            }
+        ],
+        restoredBy:[
+            {
+                accountId: String,
+                restoredAt: Date
+            }
+        ],
     },
-        {
-            timestamps: true
-        }
 );
 
 const product = mongoose.model('product',productSchema,"Products")

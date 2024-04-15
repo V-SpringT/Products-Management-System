@@ -24,10 +24,10 @@ block main
 
     if(productCategorys.description)
         div(Class="mb-4")  !{productCategorys.description}
-    
-    a(
-        class="btn btn-warning btn-sm"
-        href=`${prefixAdmin}/products-category/edit/${productCategorys.id}`
-    ) Chỉnh sửa
+    if(roleMDW.permissions.includes("products-category_edit"))
+        a(
+            class="btn btn-warning btn-sm"
+            href=`${prefixAdmin}/products-category/edit/${productCategorys.id}`
+        ) Chỉnh sửa
 
     script(src=`/admin/js/product.js`)

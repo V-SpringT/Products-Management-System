@@ -1,0 +1,26 @@
+extends ../../layout/default.pug 
+include ../../mixins/Alert
+block main 
+    +alert-success(5000)
+    .row 
+        h1(class="mb-4") Thông tin cá nhân   
+        .col-6 
+            if(userMDW.fullName)
+                p Họ tên: <b>#{userMDW.fullName}</b>
+            if(userMDW.email)
+                p Email: <b>#{userMDW.email}</b>
+            if(userMDW.phone)
+                p Số điện thoại: <b>#{userMDW.phone}</b>
+            p
+                span Trạng thái: 
+                span 
+                    <b>#{userMDW.status == "active" ? "Hoạt động" : "Dừng hoạt động"}</b>
+            if(roleMDW.title)
+                p Phân quyền: <b>#{roleMDW.title}</b>
+        .col-6
+            if(userMDW.avatar)
+                img(src=userMDW.avatar, alt="",  width="150px", class="mb-3")
+    a(
+        href=`${prefixAdmin}/my-account/edit`
+        class="btn btn-primary"
+    ) Chỉnh sửa thông tin
