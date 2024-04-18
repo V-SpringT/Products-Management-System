@@ -1,6 +1,7 @@
+include ../mixins/sub-menu
 header.header
     .container 
-        .row-align-item-center 
+        .row-align-item-center    
             .col-3
                 .inner-logo
                     a(href="/")
@@ -12,18 +13,20 @@ header.header
                             a(href="/" class="text-decoration-none") Trang chủ 
                         li(class="sub-menu")
                             a(href="/products" class="text-decoration-none") Sản phẩm
-                            ul
-                                li
-                                    a(href="/products/slug-1" class="text-decoration-none") Mục 1
-                                    ul
-                                        li
-                                            a(href="/products/slug-1-1" class="text-decoration-none") Mục 1-1
-                                        li
-                                            a(href="/products/slug-1-2" class="text-decoration-none") Mục 1-2
-                                            ul
-                                                li
-                                                    a(href="/products/slug-1-2-1" class="text-decoration-none") Mục 1-2-1
-                                                li
-                                                    a(href="/products/slug-1-2-2" class="text-decoration-none") Mục 1-2-2
-                                li 
-                                    a(href="/products/slug-2" class="text-decoration-none") Mục 2        
+                            +sub-menu(categorys,"/products")
+                            
+                            //- ul
+                            //-     li
+                            //-         a(href="/products/slug-1" class="text-decoration-none") Mục 1
+                            //-         ul
+                            //-             li
+                            //-                 a(href="/products/slug-1-1" class="text-decoration-none") Mục 1-1
+                            //-             li
+                            //-                 a(href="/products/slug-1-2" class="text-decoration-none") Mục 1-2
+                            //-                 ul
+                            //-                     li
+                            //-                         a(href="/products/slug-1-2-1" class="text-decoration-none") Mục 1-2-1
+                            //-                     li
+                            //-                         a(href="/products/slug-1-2-2" class="text-decoration-none") Mục 1-2-2
+                            //-     li 
+                            //-         a(href="/products/slug-2" class="text-decoration-none") Mục 2        

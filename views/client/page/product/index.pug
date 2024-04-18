@@ -7,16 +7,17 @@ block main
                 +box-head("Danh sách sản phẩm") 
         .row    
             each item in products    
-                .col-4.mb-3 
-                    .product-item
-                        img(src=item.thumbnail, alt="")
-                    .inner-content
-                        h3.inner-title 
-                            a(
-                                href=`/products/${item.slug}`
-                                style="text-decoration: none;"
-                            ) #{item.title}
-                        .inner-price-new #{item.newPrice}$
-                        .inner-price-old #{item.price}$
-                        .inner-discount -#{item.discountPercentage}%
+                .col-3.mb-3   
+                    div.frame 
+                        .product-item 
+                            img(src=item.thumbnail, alt="")
+                        .inner-content
+                            .inner-title 
+                                a(
+                                    href=`/products/${item.slug}`
+                                    style="text-decoration: none;"
+                                ) #{item.title}
+                            .inner-price-new #{item.newPrice}$
+                            .inner-price-old #{item.price}$
+                            .inner-discount -#{item.discountPercentage}%
         

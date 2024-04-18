@@ -35,18 +35,24 @@ module.exports.create = async (req,res) =>{
 
 //[POST] /admin/products-category/create
 module.exports.createPost = async (req,res) =>{
-    if(isNaN(req.body.positon)){
-        const counter = await productsCategory.countDocuments()
-        req.body.position = parseInt(counter + 1)
+    if(res.locals.roleMDW.permissions.includes("products-category_create")){
+        if(isNaN(req.body.positon)){
+            const counter = await productsCategory.countDocuments()
+            req.body.position = parseInt(counter + 1)
+        }
+        else{
+            req.body.position = parseInt(req.body.positon)
+        }
+        console.log(req.body)
+        const record = new productsCategory(req.body)
+        await record.save();
+    
+        res.redirect(`${systemConfig.prefixAdmin}/products-category`)
     }
     else{
-        req.body.position = parseInt(req.body.positon)
+        return;
     }
-    console.log(req.body)
-    const record = new productsCategory(req.body)
-    await record.save();
-
-    res.redirect(`${systemConfig.prefixAdmin}/products-category`)
+    
 }
 
 //[GET] /admin/products-category/detail/:id
@@ -159,4 +165,23 @@ module.exports.restore = async (req, res) => {
     }
     res.redirect("back")
     
+}
+
+//[PATCH] /admin/products-category/change-status/:id
+module.exports.changeStatus = async (req, res) => {
+    try{
+        const status = req.params.status
+        const id = req.params.id
+        await productsCategory.updateOne(
+            {_id: id},
+            {status: status}
+        );
+
+        req.flash("success","Cập nhật trạng thái thành công")
+    }
+    catch(e){
+        req.flash("error","Cập nhật trạng thái thất bại")
+    }
+
+    res.redirect('back')
 }

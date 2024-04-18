@@ -8,11 +8,11 @@
     .header .inner-logo a{
         display: block;
     }
-    .container .row-align-item-center {
+    .container .row-align-item-center{
         display: flex;
         align-items: center;
     }
-    .header .inner-logo img {
+    .header .inner-logo img{
         max-height: 80px;
         max-width: 100%;
     }
@@ -36,41 +36,52 @@
     .container.my-3 .box-head .inner-title{
         color: green;
     } 
-    .container.my-3 .row .col-4.mb-3{
-        display: inline-block;
-        width: 200px;
-        padding: 0;
-        border-radius: 20px;
+    .container.my-3 .col-3.mb-3 .frame {
+        max-width: 98%;
+        border: 1px solid #ddd;
+        border-radius: 18px;
         overflow: hidden;
-        margin-top: 20px;
-        border: 1px solid #EEEEEE;
     }
-    .container.my-3 .row .col-4.mb-3 .product-item{
-        aspect-ratio: 4/3;
+    .container.my-3 .row .col-3.mb-3 .product-item{
+        aspect-ratio: 3/2;
+
     }
-    .container.my-3 .row .col-4.mb-3 .product-item img{
+    .container.my-3 .row .col-3.mb-3 .product-item img{
         object-fit: cover;
+        width: 100%;
         height: 100%;
     }
-    .container.my-3 .row .col-4.mb-3 .inner-content {
+    .container.my-3 .row .col-3.mb-3 .inner-content {
         margin: 10px 10px;
     }
-    .container.my-3 .row .col-4.mb-3 .inner-content .inner-price-new{
+    .container.my-3 .row .col-3.mb-3 .inner-content .inner-title {
+        display: block;
+        height: 60px;
+        max-width: 100%;
+    }
+    .container.my-3 .row .col-3.mb-3 .inner-content .inner-title a {
+        font-size: 1.2vw;
+        font-weight: 700;
+    }
+    .container.my-3 .row .col-3.mb-3 .inner-content .inner-price-new{
         color: green;
         font-weight: 600;
+        font-size: 1.2vw;
     }
-    .container.my-3 .row .col-4.mb-3 .inner-content .inner-price-old{
+    .container.my-3 .row .col-3.mb-3 .inner-content .inner-price-old{
         text-decoration: line-through;
         color: red;
         font-weight: 600;
         margin: 10px 0;
+        font-size: 1vw;
     }
-    .container.my-3 .row .col-4.mb-3 .inner-content .inner-discount{
+    .container.my-3 .row .col-3.mb-3 .inner-content .inner-discount{
         background-color: red;
         border-radius: 10px;
         color: #fff;
         display: inline-block;
         padding: 0 10px;
+        font-size: 1vw;
     }
 /* end product */
 

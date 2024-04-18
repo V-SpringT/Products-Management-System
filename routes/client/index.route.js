@@ -1,10 +1,17 @@
 const productRoutes = require('./product.route')
 const homeRoutes = require('./home.route');
+const categoryMiddleware = require("../../middlewares/client/category.milddleware")
 
 module.exports = (app)=>{
-    
-    app.use('/',homeRoutes);
+    app.use(categoryMiddleware.category)
+    app.use(
+        '/',
+        homeRoutes
+    );
 
-    app.use('/products',productRoutes); // gan /product sang vi ban dau la /product r
+    app.use(
+        '/products',
+        productRoutes
+    ); 
      
 }
