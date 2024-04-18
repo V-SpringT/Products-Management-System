@@ -27,7 +27,7 @@ module.exports.index = async (req,res)=>{
 
 }
 
-// [GET] /products/:slug
+// [GET] /products/detail/:slug
 module.exports.detail = async (req,res)=>{
     try{
         const slug = req.params.slug
@@ -38,7 +38,20 @@ module.exports.detail = async (req,res)=>{
         }
 
         const product = await Product.findOne(find)
+
+        
         if(product){
+            if(product.category_id){
+                const category = await productsCategory.findOne({
+                    _id: product.category_id,
+                    status: "active",
+                    deleted: false
+                })
+                product.category = category
+            }
+
+            product.newPrice =  (product.price*(100-product.discountPercentage)/100).toFixed(0);
+
             res.render("client/page/product/detail",{
                 pageTitle: "Trang chi tiết sản phẩm",
                 product: product
