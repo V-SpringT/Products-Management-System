@@ -1,7 +1,8 @@
-// [GET] /products
 
 const Product = require("../../model/products.model");
-
+const productsCategory = require("../../model/products-category.model");
+const CategoryHelper = require("../../helper/product-category")
+// [GET] /products
 module.exports.index = async (req,res)=>{
     try{
         const products = await Product.find({
@@ -26,7 +27,7 @@ module.exports.index = async (req,res)=>{
 
 }
 
-
+// [GET] /products/:slug
 module.exports.detail = async (req,res)=>{
     try{
         const slug = req.params.slug
@@ -51,5 +52,40 @@ module.exports.detail = async (req,res)=>{
     catch(error){
         res.redirect('/products')
     }
+
+}
+// [GET] /products/:slugCategory
+module.exports.productOfCategory = async (req,res)=>{
+    try{
+        
+        const slug = req.params.slugCategory;
+        
+        const productCategory = await productsCategory.findOne({
+            slug : slug,
+            deleted: false
+        })
+        const listSubCategory = await CategoryHelper.getSubCategory(productCategory.id)
+        const listSubCategoryId = await listSubCategory.map(item => {
+            return item.id
+        })
+        const products = await Product.find({
+            category_id: {$in : [productCategory.id,...listSubCategoryId]},
+            deleted: false,
+            status: "active"
+        })
+        const productsUpdate = products.map(item=>{
+            item.newPrice = (item.price*(100-item.discountPercentage)/100).toFixed(0);
+            return item;
+        })
+        res.render("client/page/product/index",{
+            pageTitle: productCategory.title,
+            products : productsUpdate
+        })
+
+    }
+    catch(e){
+        res.redirect("/products")
+    }
+
 
 }
