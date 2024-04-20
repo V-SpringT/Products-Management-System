@@ -31,6 +31,7 @@ module.exports.index = async (req,res)=>{
             ).toFixed(0)
             return item;
         })
+        console.log(lastestProductsUpdate)
     //end lastest products
     res.render("client/page/home/index",{
         pageTitle: "Trang chu",

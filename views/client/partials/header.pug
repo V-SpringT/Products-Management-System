@@ -1,32 +1,37 @@
-include ../mixins/sub-menu
+
 header.header
     .container 
-        .row-align-item-center    
-            .col-3
+        .row.content
+            .col-2
                 .inner-logo
                     a(href="/")
-                        img(src="/image/logo.png", alt="")
-            .col-9
-                .inner-menu.d-flex.justify-content-center 
+                        img(src="/logo.png", alt="")
+            .col-5
+                form(
+                    action="/search"
+                    method="GET"
+                )
+                    div(class="form-group d-flex mb-0")
+                        input(
+                            type="text"
+                            placeholder="Nhập từ khóa"
+                            class="form-control"
+                            name="keyword"
+                            style="width: 80%"
+                        )   
+                        button(
+                            type="submit"
+                            class="btn btn-primary"
+                        ) Tìm kiếm
+            .col-4
+                .inner-menu
                     ul
-                        li.me-5
-                            a(href="/" class="text-decoration-none") Trang chủ 
+                        li
+                            a(href="/" class="text-decoration-none") <i class="fa-solid fa-house"></i> Trang chủ 
                         li(class="sub-menu")
-                            a(href="/products" class="text-decoration-none") Sản phẩm
-                            +sub-menu(categorys,"/products")
-                            
-                            //- ul
-                            //-     li
-                            //-         a(href="/products/slug-1" class="text-decoration-none") Mục 1
-                            //-         ul
-                            //-             li
-                            //-                 a(href="/products/slug-1-1" class="text-decoration-none") Mục 1-1
-                            //-             li
-                            //-                 a(href="/products/slug-1-2" class="text-decoration-none") Mục 1-2
-                            //-                 ul
-                            //-                     li
-                            //-                         a(href="/products/slug-1-2-1" class="text-decoration-none") Mục 1-2-1
-                            //-                     li
-                            //-                         a(href="/products/slug-1-2-2" class="text-decoration-none") Mục 1-2-2
-                            //-     li 
-                            //-         a(href="/products/slug-2" class="text-decoration-none") Mục 2        
+                            a(href="/products" class="text-decoration-none") <i class="fa-brands fa-product-hunt"></i> Sản phẩm
+                        li
+                            a(href="/artical" class="text-decoration-none") <i class="fa-solid fa-newspaper"></i> Bài viết
+            .col-1
+                .inner-user
+                    a(href="/user" class="text-decoration-none") <i class="fa-solid fa-circle-user"></i>

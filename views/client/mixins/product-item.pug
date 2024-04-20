@@ -1,16 +1,15 @@
 mixin product-item(item)
-    .col-3.mb-3 
-        div.frame 
-            .inner-image 
-                img(src=item.thumbnail, alt="")
-                if(item.featured == "1")
-                    .inner-featured Nổi bật
-            .inner-content
-                .inner-title 
-                    a(
-                        href=`/products/detail/${item.slug}`
-                        style="text-decoration: none;"
-                    ) #{item.title}
-                .inner-price-new #{item.newPrice}$
-                .inner-price-old #{item.price}$
-                .inner-discount -#{item.discountPercentage}%
+    div.product-item
+        .inner-image 
+            img(src=item.thumbnail, alt=item.title)
+            if(item.featured)
+                .inner-featured Nổi bật
+        .inner-content
+            .inner-title 
+                a(
+                    href=`/products/detail/${item.slug}`
+                    style="text-decoration: none;"
+                ) #{item.title}
+            .inner-price-new #{item.newPrice}$
+            .inner-price-old #{item.price}$
+            .inner-discount -#{item.discountPercentage}%
