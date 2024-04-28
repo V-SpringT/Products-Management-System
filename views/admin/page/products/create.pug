@@ -32,6 +32,43 @@ block main
                     option(value="") -- Chọn danh mục --
                     if(categorys)
                         +select-tree(categorys)
+            div(class="form-group")
+                label(for="brand_id") Chọn thương hiệu
+                select(
+                    name="brand_id"
+                    id="brand_id"
+                    class="form-control"
+                ) 
+                    option(value="") -- Chọn thương hiệu --
+                    for brand in brands
+                        option(value=brand.id) #{brand.title}
+            div(class="form-group")
+                label(for="size") Chọn kích thước
+                input.d-none(
+                    type="text"
+                    size-list
+                    name="size"
+                    class="form-control"
+                    id="size"
+                )
+                div.d-flex.mx-2(class="checkbox-size")
+                    each sz in size
+                        div(class="size-box mx-2 size-btn" ) 
+                            input(type="checkbox" value=sz class="btn-check size-btn" id=sz autocomplete="off")
+                            label(class="btn btn-outline-primary" for=sz style="font-size: 14px; font-weight: 600") #{sz}
+
+            div(class="form-group")
+                label(for="brand_id") Chọn kiểu dáng
+                select(
+                    name="type"
+                    id="type"
+                    class="form-control"
+                ) 
+                    option(value="") -- Chọn kiểu dáng --
+                    for type in types
+                        option(value=type) #{type}          
+
+
             label(for="" class="d-block") Sản phẩm nổi bật 
             div(class="form-group form-check form-check-inline")
                 input(

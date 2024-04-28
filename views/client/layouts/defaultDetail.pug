@@ -14,16 +14,10 @@ html
 
         .home
             .container-custom
-                .row
-                    .col-2
-                        div(class="sider")
-                            block sider
-                                
-                    .col-10
-                        div(class="content")
-                            block content
-                            hr
-                            include ../partials/footer.pug
+                div(class="content")
+                    block content
+                    hr
+                    include ../partials/footer.pug
 
 
         include ../partials/copyright.pug

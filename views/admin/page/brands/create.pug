@@ -1,0 +1,73 @@
+extends ../../layout/default.pug 
+include ../../mixins/Alert
+block main 
+    +alert-error(5000)
+    h1(class="mb-4") Thêm mới thương hiệu
+
+    form(
+        action=`${prefixAdmin}/brands/create`
+        method="POST"
+        enctype="multipart/form-data"
+    ) 
+        div(class="form-group")
+            label(for="title") Tiêu đề
+            input(
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+            )
+        div(class="form-group")
+            label(for="desc") Mô tả
+            textarea(
+                class="form-control mce"
+                id="desc"
+                name="description"
+                rows="5"
+            )
+        div(
+            class="form-group"
+            upload-image
+        )
+            label(for="thumbnail") Ảnh 
+            input(
+                type="file"
+                class="form-control-file"
+                id="thumbnail"
+                name="thumbnail"
+                style="display: block"
+                accept="image/*"
+                upload-image-input
+            )
+            img(
+                src=""
+                alt=""
+                upload-image-preview
+                class="image-preview"
+                )
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusActive"
+                name="status"
+                value="active"
+                checked
+            ) 
+            label(for="statusActive" class="form-check-label") Hoạt động
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusInactive"
+                name="status"
+                value="inactive"
+            ) 
+            label(for="statusInactive" class="form-check-label") Dừng hoạt động
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Tạo mới
+    script(src="/admin/js/brands.js")

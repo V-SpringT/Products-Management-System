@@ -36,4 +36,4 @@ router.get("/deleted-category", controller.deleted)
 router.post("/deleted-category/restore/:id", controller.restore)
 
 router.patch("/change-status/:status/:id", controller.changeStatus)
-module.exports = router;
+module.exports = router; 

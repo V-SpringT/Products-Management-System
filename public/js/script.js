@@ -1,7 +1,6 @@
-
 //featured slider
-$('.slick-slider').slick({
-    slidesToShow: 3,
+  $('.featured-box').slick({
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
     autoplay: true,
@@ -26,8 +25,9 @@ $('.slick-slider').slick({
     dots: true,
   });
 
+
   // lastest products  
-  $('.products').slick({
+  $('.lastest-box').slick({
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
@@ -66,6 +66,184 @@ $('#desc-img').slick({
     minutes.innerHTML = m;
     seconds.innerHTML = s;
   }
-  setInterval(()=>{
-    countdouwn()
-  },1000)
+  if(days && hours && minutes && seconds){
+    setInterval(()=>{
+      countdouwn()
+    },1000)
+  }
+
+  // Pagination 
+
+  const buttonPagination = document.querySelectorAll("[button-pagination]");
+  if(buttonPagination){
+      let url = new URL(window.location.href);
+      buttonPagination.forEach(button => {
+          button.addEventListener("click", ()=>{
+              const page = button.getAttribute("button-pagination")
+              url.searchParams.set("page",page);
+
+              window.location.href = url.href; 
+          })
+      });
+  }
+
+// End Pagination 
+
+
+
+// sort 
+const sort = document.querySelector(".sort")
+if(sort){
+    let url = new URL(window.location.href)
+    const sortSelect = sort.querySelector("[sort-select]")
+    sortSelect.addEventListener("change",(e)=>{
+        const [sortKey,sortValue] = e.target.value.split("-")
+        url.searchParams.set("sortKey",sortKey)
+        url.searchParams.set("sortValue",sortValue)
+
+        window.location.href = url.href;
+    })
+
+    /*set value select tag*/
+
+    const sortKey = url.searchParams.get("sortKey")
+    const sortValue = url.searchParams.get("sortValue")
+
+    if(sortKey && sortValue){
+        const stringSort = `${sortKey}-${sortValue}`
+        const optionSelected = sortSelect.querySelector(`option[value='${stringSort}']`)
+        optionSelected.selected=true;
+    }
+
+
+}
+
+//end sort 
+
+
+// brand filter
+const brandFilter = document.querySelector(".filter-brand")
+
+if(brandFilter){
+  let url = new URL(window.location.href)
+  const brandCb = brandFilter.querySelectorAll(".brand-checkbox")
+  brandCb.forEach(cb =>{
+    cb.addEventListener("click",(e)=>{
+      const checkedValue = []
+      const cbSelected = brandFilter.querySelectorAll("input[type='checkbox']:checked")
+      if(cbSelected.length > 0){
+        cbSelected.forEach(checked => {
+          checkedValue.push(checked.value)
+        })
+      }
+      url.searchParams.set("brand",checkedValue.join("-"))
+      window.location.href = url.href;
+    })
+    
+})
+
+  /* Set value */
+  const brand = url.searchParams.get("brand")
+  let brandVal = []
+  if(brand)
+    brandVal = brand.split("-") 
+  if(brandVal.length > 0){
+    brandVal.forEach(check =>{
+      const checkedInput = brandFilter.querySelector(`input[value='${check}']`)
+      checkedInput.checked = true;
+    })
+    
+  }
+
+
+}
+
+// end brand filter
+
+
+// type filter
+const typeFilter = document.querySelector(".filter-type")
+
+if(typeFilter){
+  let url = new URL(window.location.href)
+  const typeCb = typeFilter.querySelectorAll(".type-checkbox")
+  typeCb.forEach(cb =>{
+    cb.addEventListener("click",(e)=>{
+      const checkedValue = []
+      const cbSelected = typeFilter.querySelectorAll("input[type='checkbox']:checked")
+      if(cbSelected.length > 0){
+        cbSelected.forEach(checked => {
+          checkedValue.push(checked.value)
+        })
+      }
+      url.searchParams.set("type",checkedValue.join("-"))
+      window.location.href = url.href;
+    })
+    
+})
+
+  /* Set value */
+  const type = url.searchParams.get("type")
+  let typeVal = []
+  if(type)
+    typeVal = type.split("-") 
+  if(typeVal.length > 0){
+    
+    typeVal.forEach(check =>{
+      const checkedInput = typeFilter.querySelector(`input[value='${check}']`)
+      checkedInput.checked = true;
+    })
+    
+  }
+}
+// end type filter
+
+
+// price ratio 
+const priceRadio = document.querySelector(".price-radio")
+if(priceRadio) {
+  let url = new URL(window.location.href)
+  const radio = priceRadio.querySelectorAll("input[type='radio']")
+  radio.forEach(rd => {
+    rd.addEventListener("change",(e)=>{
+      url.searchParams.set("priceRadio",e.target.value)
+      window.location.href = url.href;
+    })
+  })
+
+  /*set value*/
+
+  const idxRadio = url.searchParams.get("priceRadio")
+  if(idxRadio){
+    const radioChecked = priceRadio.querySelector(`input[value='${idxRadio}']`)
+    radioChecked.checked = true;
+  }
+}
+// end price ratio 
+
+
+// price text 
+const priceInput = document.querySelector(".price-input")
+if(priceInput){
+  let url = new URL(window.location.href)
+  const minPrice = priceInput.querySelector(".min-price")
+  const maxPrice = priceInput.querySelector(".max-price")
+  const sub = priceInput.querySelector(".btn-sub")
+  if(sub && minPrice && maxPrice){
+    sub.addEventListener("click",(e)=>{
+      const StrPrice = minPrice.value + "-" + maxPrice.value
+      url.searchParams.set("priceInput",StrPrice)
+      window.location.href = url.href;
+    })
+  }
+
+  /* set value */
+  const ValInput = url.searchParams.get("priceInput")
+  if(ValInput){
+    const [minV, maxVal] = ValInput.split("-")
+    minPrice.value = minV
+    maxPrice.value = maxVal
+  }
+    
+}
+// end price text

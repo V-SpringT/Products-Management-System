@@ -77,7 +77,7 @@ if(checkboxMulti){
     inputsId.forEach(btn =>{
         btn.addEventListener("click",()=>{
             const countChecked = checkboxMulti.querySelectorAll("input[name='id']:checked").length;
-            if(countChecked == inputsId.length) checkAll.checked = TextTrackCueList
+            if(countChecked == inputsId.length) checkAll.checked = true
             else checkAll.checked = false;
         })
     })
@@ -104,7 +104,7 @@ if(formChangeMulti){
             }
         }
 
-        
+         
 
         if(inputsChecked.length > 0){
             let ids = [];
@@ -163,7 +163,7 @@ if(uploadImage){
             uploadImagePreview.src = URL.createObjectURL(file)
         }
     })
-}
+} 
 
 // end Upload 
 
@@ -196,3 +196,20 @@ if(sort){
 
     
 // end sort 
+
+// check-box-multi size-product
+    const checkboxBtn = document.querySelectorAll(".size-btn")
+    const sizeList = document.querySelector("input[size-list]")
+    checkboxBtn.forEach(cb =>{       
+        cb.addEventListener("click", (e)=>{
+            const sizelst = []
+            const checked = document.querySelectorAll('input[type="checkbox"].size-btn:checked')
+            
+            checked.forEach(t => {
+                sizelst.push(t.value)
+            })
+            sizeList.value = sizelst.join(",")
+        })
+        
+    })
+// end check-box-multi size-product

@@ -79,6 +79,30 @@ block main
                         each item in roles 
                             td(Class="text-center")
                                 input(type="checkbox")
+                    //- Brand
+                    tr
+                        td(colspan="4")
+                            b Thương hiệu
+                    tr(data-name="brands_view")
+                        td Xem
+                        each item in roles 
+                            td(Class="text-center")
+                                input(type="checkbox")
+                    tr(data-name="brands_create")
+                        td Thêm mới
+                        each item in roles 
+                            td(Class="text-center")
+                                input(type="checkbox") 
+                    tr(data-name="brands_edit")
+                        td Chỉnh sửa
+                        each item in roles 
+                            td(Class="text-center")
+                                input(type="checkbox")
+                    tr(data-name="brands_delete")
+                        td Xóa
+                        each item in roles 
+                            td(Class="text-center")
+                                input(type="checkbox")
                     //- Nhóm quyền 
                     tr
                         td(colspan="4")
@@ -109,6 +133,7 @@ block main
                         each item in roles 
                             td(Class="text-center")
                                 input(type="checkbox")
+                    //-account
                     tr
                         td(colspan="4")
                             b Tài khoản

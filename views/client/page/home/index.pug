@@ -1,203 +1,123 @@
 extends ../../layouts/default.pug
 include ../../mixins/product-item
-block main 
-    .home
-        .container-custom
-            .row
-                .col-2
-                    div(class="sider")
-                        div(class="product-category sub-sider")
-                            h4 Danh mục sản phẩm
-                            ul 
-                                li 
-                                    a(href="" class="") 
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 1 Danh muc 1
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 2
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 3
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 4
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 5
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 6
-                        div(class="artical-category sub-sider")
-                            h4 Danh mục bài viết
-                            ul 
-                                li 
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p  Danh muc 1
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 2
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 3
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 4
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 5
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 6
-                        div(class="featured sub-sider")
-                            h4 Nổi bật
-                            ul 
-                                li 
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 1
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 2
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 3
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 4
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 5
-                                li
-                                    a(href="" class="")
-                                        div(class="img-box")
-                                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                                        p Danh muc 6
-                        
-                .col-10
-                    div(class="content")
-                        div.desc-img
-                            div( id="desc-img" class="carousel-inner")
-                                div(class="big-desc-img")
-                                    img(src="/image/slider1.jpg", alt="")
-                                div(class="big-desc-img")
-                                    img(src="/image/slider2.jpg", alt="")
-                                div(class="big-desc-img")
-                                    img(src="/image/slider3.jpg", alt="")     
-                            .row.my-2
-                                .col-4.d-flex.justify-content-center
-                                    div.coupon
-                                        img(src="https://file.hstatic.net/200000306687/file/background-coupon_d5a81f5bc7ea49_ec6d59fdd17c4a718809792590ed9455.png", alt="")
-                                        div.inner-coupon 
-                                            span.code Mã: F1SHOES
-                                            img(src="/image/coupon1.png", alt="")
-                                            span.condition Giảm 10% khu mua 1 sản phẩm
-                                .col-4
-                                    div.coupon 
-                                        img(src="https://file.hstatic.net/200000306687/file/background-coupon_d5a81f5bc7ea49_ec6d59fdd17c4a718809792590ed9455.png", alt="")
-                                        div.inner-coupon 
-                                            span.code Mã: F2SHOES
-                                            img(src="/image/coupon2.png", alt="")
-                                            span.condition Giảm 13% khu mua 2 sản phẩm
-                                .col-4
-                                    div.coupon
-                                        img(src="https://file.hstatic.net/200000306687/file/background-coupon_d5a81f5bc7ea49_ec6d59fdd17c4a718809792590ed9455.png", alt="")
-                                        div.inner-coupon 
-                                            span.code Mã: F3SHOES
-                                            img(src="/image/coupon4.png", alt="")
-                                            span.condition Giảm 20% khu mua 3 sản phẩm
-                        div(class="featured-product")
-                            h3 Sản phẩm nổi bật      
-                            div.slick-slider  
-                                each item in featuredProducts
-                                    +product-item(item)
-                        div(class="sale")
-                            div(class="slogan")
-                                img(src="/image/slogan_sale.png", alt="")
-                                div(id="countdown") 
-                                    label Kết thúc sau
-                                    div(Class="countdown-loop")  
-                                        div(class="time")
-                                            span(id="days" class="num") 00  
-                                            span(class="txt") Ngày 
-                                        div(class="time" )
-                                            span(id="hours" class="num") 00  
-                                            span(class="txt") Giờ    
-                                        div(class="time")
-                                            span(id="minutes" class="num") 00  
-                                            span(class="txt") Phút  
-                                        div(class="time")
-                                            span(id="seconds" class="num") 00  
-                                            span(class="txt") Giây  
-                            div(class="sale-products")
-                                div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-                                div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-                                div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-                                div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-                                div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-                                div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-                        div(class="lastest-product")
-                            h3 Sản phẩm mới    
-                            div(class="more")
-                                a(href="") Xem thêm <i class="fa-solid fa-arrow-right"></i>
-                            div.products
-                                each item in lastestProducts
-                                    +product-item(item)
-                        div(class="customer-care")
-                            div(class="inner-left")
-                                h3 Tư vấn ngay để nhận ưu đãi mới nhất!
-                                span.txt-1 Chúng tôi cam kết bảo mật không lộ thông tin của bạn.
-                                form(
-                                    action="/search"
-                                    method="GET"
-                                )
-                                    div(class="form-group form-care")
-                                        input(
-                                            type="text"
-                                            placeholder="Nhập số điện thoại"
-                                            class="form-control"
-                                            name="keyword"
-                                        )   
-                                        button(
-                                            type="submit"
-                                        ) Tư vấn
-                                span.txt-2 Nhận ngay voucher giảm giá 15% khi mua hàng lần đầu
-                            div(class="inner-right")
-                                img(src="/image/register-img.png", alt="")
-                        hr
-                        include ../../partials/footer.pug    
-                                
-                    
-                    
+block sider
+    div(class="product-category sub-sider")
+        h4 Danh mục sản phẩm
+        ul 
+            each item in [1,2,3,4,5,6]
+                li 
+                    a(href="" class="") 
+                        div(class="img-box")
+                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
+                        p Danh muc 1 Danh muc 1
+            
+    div(class="artical-category sub-sider")
+        h4 Danh mục bài viết
+        ul 
+            each item in [1,2,3,4,5,6]
+                li 
+                    a(href="" class="")
+                        div(class="img-box")
+                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
+                        p  Danh muc 1
+    div(class="featured sub-sider")
+        h4 Nổi bật
+        ul 
+            each item in [1,2,3,4,5,6]
+                li 
+                    a(href="" class="")
+                        div(class="img-box")
+                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
+                        p Danh muc 1
+        
+block content
+    div.desc-img
+        div( id="desc-img" class="carousel-inner")
+            div(class="big-desc-img")
+                img(src="/image/slider1.jpg", alt="")
+            div(class="big-desc-img")
+                img(src="/image/slider2.jpg", alt="")
+            div(class="big-desc-img")
+                img(src="/image/slider3.jpg", alt="")     
+        .row.my-2
+            .col-4.d-flex.justify-content-center
+                div.coupon
+                    img(src="https://file.hstatic.net/200000306687/file/background-coupon_d5a81f5bc7ea49_ec6d59fdd17c4a718809792590ed9455.png", alt="")
+                    div.inner-coupon 
+                        span.code Mã: F1SHOES
+                        img(src="/image/coupon1.png", alt="")
+                        span.condition Giảm 10% khu mua 1 sản phẩm
+            .col-4
+                div.coupon 
+                    img(src="https://file.hstatic.net/200000306687/file/background-coupon_d5a81f5bc7ea49_ec6d59fdd17c4a718809792590ed9455.png", alt="")
+                    div.inner-coupon 
+                        span.code Mã: F2SHOES
+                        img(src="/image/coupon2.png", alt="")
+                        span.condition Giảm 13% khu mua 2 sản phẩm
+            .col-4
+                div.coupon
+                    img(src="https://file.hstatic.net/200000306687/file/background-coupon_d5a81f5bc7ea49_ec6d59fdd17c4a718809792590ed9455.png", alt="")
+                    div.inner-coupon 
+                        span.code Mã: F3SHOES
+                        img(src="/image/coupon4.png", alt="")
+                        span.condition Giảm 20% khu mua 3 sản phẩm
+    div(class="featured-product")
+        h3 Sản phẩm nổi bật      
+        div.featured-box
+            each item in featuredProducts
+                +product-item(item)
+    div(class="sale")
+        div(class="slogan")
+            img(src="/image/slogan_sale.png", alt="")
+            div(id="countdown") 
+                label Kết thúc sau
+                div(Class="countdown-loop")  
+                    div(class="time")
+                        span(id="days" class="num") 00  
+                        span(class="txt") Ngày 
+                    div(class="time" )
+                        span(id="hours" class="num") 00  
+                        span(class="txt") Giờ    
+                    div(class="time")
+                        span(id="minutes" class="num") 00  
+                        span(class="txt") Phút  
+                    div(class="time")
+                        span(id="seconds" class="num") 00  
+                        span(class="txt") Giây  
+        div(class="sale-products")
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+    div(class="lastest-product")
+        h3 Sản phẩm mới    
+        div(class="more")
+            a(href="") Xem thêm <i class="fa-solid fa-arrow-right"></i>
+        div.lastest-box
+            each item in lastestProducts
+                +product-item(item)
+    div(class="customer-care")
+        div(class="inner-left")
+            h3 Tư vấn ngay để nhận ưu đãi mới nhất!
+            span.txt-1 Chúng tôi cam kết bảo mật không lộ thông tin của bạn.
+            form(
+                action="/search"
+                method="GET"
+            )
+                div(class="form-group form-care")
+                    input(
+                        type="text"
+                        placeholder="Nhập số điện thoại"
+                        class="form-control"
+                        name="keyword"
+                    )   
+                    button(
+                        type="submit"
+                    ) Tư vấn
+            span.txt-2 Nhận ngay voucher giảm giá 15% khi mua hàng lần đầu
+        div(class="inner-right")
+            img(src="/image/register-img.png", alt="")   
+            
+

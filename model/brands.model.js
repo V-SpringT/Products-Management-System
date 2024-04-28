@@ -3,27 +3,12 @@ const mongoose = require('mongoose');
 const slug = require('mongoose-slug-updater');
 mongoose.plugin(slug);
 
-const productSchema = new mongoose.Schema(
+const brandSchema = new mongoose.Schema(
     {     
         title : String,
-        category_id: {
-            type: String, 
-            default: "",
-        },
         description: String,
-        brand_id: String,
-        type: String,
-        color: String,
-        price: Number,
-        size: [Number],
-        discountPercentage: Number,
-        stock: Number,
-        soldQuantity: { type: Number, default: 0 },
-        ratings: [{ type: Number, min: 0, max: 5 }],
         thumbnail: String,
-        status: String,
-        featured: String,        
-        position: Number,
+        status: String,      
         createBy :{
             accountId: String,
             createdAt: {
@@ -65,6 +50,6 @@ const productSchema = new mongoose.Schema(
     },
 );
 
-const product = mongoose.model('product',productSchema,"Products")
+const brand = mongoose.model('brand',brandSchema,"Brands")
 
-module.exports = product;
+module.exports = brand;

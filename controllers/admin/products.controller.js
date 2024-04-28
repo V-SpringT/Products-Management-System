@@ -8,6 +8,7 @@ const productsCategory = require('../../model/products-category.model')
 const createTreeHelper = require("../../helper/createTree")
 const Account = require("../../model/accounts.model")
 const Role = require("../../model/roles.model")
+const Brand = require("../../model/brands.model")
 module.exports.index = async (req,res)=>{
 
     // Filter
@@ -35,9 +36,9 @@ module.exports.index = async (req,res)=>{
     // End Search
 
     // Pagination
-
+    const limitedItem = 5
     const countProducts = await Product.countDocuments(find);
-    const paginationObject = paginationHelper(countProducts, req.query);
+    const paginationObject = paginationHelper(countProducts, req.query,limitedItem);
 
     // End Pagination 
 
@@ -55,7 +56,7 @@ module.exports.index = async (req,res)=>{
     // Query data
     const products = await Product.find(find)
     .sort(sort)
-    .limit(paginationObject.limitItem)
+    .limit(paginationObject.limitedItem)
     .skip(paginationObject.skip);
     res.render("admin/page/products/index.pug",{
         pageTitle: "Trang san pham",    
@@ -159,12 +160,20 @@ module.exports.deleteItem = async (req,res) => {
 module.exports.create = async (req,res) =>{
     let find ={
         deleted: false,
+        status: "active"
     }
+    const size = [35,36,37,38,39,40,41,42,43,44,45]
+    const type = ["Low-top","Mid-top","High-top"]
+
     const categorys = await productsCategory.find(find)
+    const brands = await Brand.find(find)
     const categorysTree = createTreeHelper.tree(categorys,"")
     res.render("admin/page/products/create",{
         pageTitle: "Thêm mới sản phẩm",
-        categorys : categorysTree
+        categorys : categorysTree,
+        brands : brands,
+        size : size,
+        types: type
     })
 
 }
@@ -183,9 +192,16 @@ module.exports.createPost = async (req,res) => {
         req.body.position = parseInt(req.body.positon)
     }
     console.log(res.locals.userMDW)
-    req.body.createBy = {
+    req.body.createBy = {   
         accountId: res.locals.userMDW.id
     }
+
+    //format size
+        req.body.size = req.body.size.split(",").map(sz =>{
+            return parseInt(sz)
+        })
+    //end format size
+
     console.log(req.body)
     const product = new Product(req.body)
     await product.save();
