@@ -1,52 +1,83 @@
+// Show alert 
+const showAlert = document.querySelector("[show-alert]")
+console.log(showAlert)
+if(showAlert){
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    const closeALert = showAlert.querySelector("[close-alert]");
+    setTimeout(()=>{
+        showAlert.classList.add("alert-hidden");
+    },time)
+    
+    closeALert.addEventListener("click",()=>{
+        showAlert.classList.add("alert-hidden");
+    })
+}
+// End show Alert 
+
 //featured slider
-  $('.featured-box').slick({
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnFocus: false,
-    infinite: true,
-    draggable: false,
-    prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-    nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
-  });
+  const featuredBox = document.querySelector(".featured-box")
+  if(featuredBox){
+    $('.featured-box').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      pauseOnFocus: false,
+      infinite: true,
+      draggable: false,
+      prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+      nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+    });
+  }
 
 // sale slider
-  $('.sale-products').slick({
-    slidesToShow: 4,
-    slidesToScroll: 2,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    pauseOnFocus: false,
-    infinite: true,
-    draggable: false,
-    arrows: false,
-    dots: true,
-  });
+  const saleProducts = document.querySelector(".sale-products")
+  if(saleProducts){
+    $('.sale-products').slick({
+      slidesToShow: 4,
+      slidesToScroll: 2,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      pauseOnFocus: false,
+      infinite: true,
+      draggable: false,
+      arrows: false,
+      dots: true,
+    });
+  }
 
 
   // lastest products  
-  $('.lastest-box').slick({
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: true,
-    draggable: false,
-    prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-    nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
-  });
+  const lastestBox = document.querySelector(".lastest-box")
+  if(lastestBox){
+    $('.lastest-box').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      arrows: true,
+      draggable: false,
+      prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+      nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+    });
+  }
   // end lastest products 
+
+
+
   // description img 
-$('#desc-img').slick({
-  autoplay: true,
-  autoplaySpeed: 2000,
-  fade: true,
-  draggable: false,
-  arrows: false,
-  pauseOnFocus: false,
-  dots: true,
-  infinite: true,
-});
+  const descriptionImg = document.querySelector("#desc-img")
+  if(descriptionImg){
+    $('#desc-img').slick({
+      autoplay: true,
+      autoplaySpeed: 2000,
+      fade: true,
+      draggable: false,
+      arrows: false,
+      pauseOnFocus: false,
+      dots: true,
+      infinite: true,
+    });
+  }
 //countdouwn
   const days = document.querySelector("#days")
   const hours = document.querySelector("#hours")
@@ -248,17 +279,3 @@ if(priceInput){
 }
 // end price text
 
-// Show alert 
-const showAlert = document.querySelector("[show-alert]")
-if(showAlert){
-    const time = parseInt(showAlert.getAttribute("data-time"));
-    const closeALert = showAlert.querySelector("[close-alert]");
-    setTimeout(()=>{
-        showAlert.classList.add("alert-hidden");
-    },time)
-    
-    closeALert.addEventListener("click",()=>{
-        showAlert.classList.add("alert-hidden");
-    })
-}
-// End show Alert 
