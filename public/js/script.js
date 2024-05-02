@@ -247,3 +247,18 @@ if(priceInput){
     
 }
 // end price text
+
+// Show alert 
+const showAlert = document.querySelector("[show-alert]")
+if(showAlert){
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    const closeALert = showAlert.querySelector("[close-alert]");
+    setTimeout(()=>{
+        showAlert.classList.add("alert-hidden");
+    },time)
+    
+    closeALert.addEventListener("click",()=>{
+        showAlert.classList.add("alert-hidden");
+    })
+}
+// End show Alert 

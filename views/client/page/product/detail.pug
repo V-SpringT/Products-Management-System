@@ -1,6 +1,8 @@
 extends ../../layouts/defaultDetail
 include ../../mixins/box-head 
+include ../../mixins/Alert
 block content  
+    +alert-success(5000)  
     .product-detail
         .container.my-5
             .row 
@@ -34,7 +36,7 @@ block content
                         action=`/cart/add/${product.id}`,
                         method="POST"
                     )
-                        input(
+                        input(  
                             class="form-control mb-2"
                             type="number"
                             name="quantity"

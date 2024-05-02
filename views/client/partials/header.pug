@@ -32,6 +32,11 @@ header.header
                             a(href="/products" class="text-decoration-none") <i class="fa-brands fa-product-hunt"></i> Sản phẩm
                         li
                             a(href="/artical" class="text-decoration-none") <i class="fa-solid fa-newspaper"></i> Bài viết
-            .col-1
+            .col-1.d-flex
                 .inner-user
                     a(href="/user" class="text-decoration-none") <i class="fa-solid fa-circle-user"></i>
+                .inner-cart-header  
+                    a(href="/cart" class="text-decoration-none") 
+                        <i class="fa-solid fa-cart-plus"></i>
+                        .inner-quantity 
+                            span #{miniCart ? miniCart.products.length : 0}

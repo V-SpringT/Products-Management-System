@@ -1,4 +1,76 @@
-extends ../../layouts/defaultDetail
-include ../../mixins/box-head 
-block content  
+extends ../../layouts/default.pug
+include ../../mixins/product-item
+//- include ../../mixins/pagination.pug
+block sider 
+    div(class="sort sub-sider")
+        h4 Sắp xếp 
+        select(
+            class="form-select"
+            name="sort"
+            sort-select 
+        )
+            option(value="position-desc") Vị trí giảm dần 
+            option(value="position-asc") Vị trí tăng dần
+            option(value="price-desc") Giá giảm dần 
+            option(value="price-asc") Giá tăng dần 
+    div(class="filter-type sub-sider")
+        h4 Loại giày
+        ul 
+            each item,idx in siderVar.type
+                li 
+                    div(class="form-check type-checkbox")
+                        input(
+                            class="form-check-input" 
+                            value=idx
+                            id=item
+                            type="checkbox" 
+                        )
+                        label(class="form-check-label" for=item) #{item}
+    div(class="filter-price sub-sider")
+        div(class="price-radio")
+            h4 Giá
+            ul 
+                each item, idx in siderVar.price
+                    li 
+                        div(class="form-check radio-button")
+                            input(
+                                class="form-check-input" 
+                                name="price-lower"
+                                value=idx
+                                id=item
+                                type="radio" 
+                            ) 
+                            label(class="form-check-label" for=item) Dưới #{item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<i class="fa-solid fa-dong-sign" style="font-size: 14px;"></i>
+
+        div(class="price-input")
+            h6 Nhập khoảng giá
+            div(class="row")
+                div(class="col-5")
+                    input(type="number" min=0 max=10000000 class="form-control min-price" placeholder="thấp nhất")
+                div(class="col-2")
+                    <i class="fa-solid fa-minus"></i>
+                div(class="col-5")
+                    input(type="number" min=0 max=10000000 class="form-control max-price" placeholder="cao nhất")
+                button(class="btn btn-primary btn-sub") Áp dụng
+                            
+block content
     h4 Trang tìm kiếm sản phẩm
+    div.list-product
+        each p in products 
+            +product-item(p)
+    //- +pagination(pagination)
+    div(class="sale")
+        h4 Sản phẩm siêu giảm giá
+        div(class="sale-products")
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+    link(rel="stylesheet", href="/css/products.css")
+
+            
+                                
+                    
+                    
