@@ -6,7 +6,7 @@ const checkoutRoutes = require('./checkout.route');
 const userRoutes = require('./user.route');
 const categoryMiddleware = require("../../middlewares/client/category.milddleware")
 const cartMiddleware = require("../../middlewares/client/cart.milddleware")
-
+const userMiddleware = require("../../middlewares/client/user.milddleware")
 module.exports = (app)=>{
     app.use(categoryMiddleware.category)
     app.use(cartMiddleware.cartId)
