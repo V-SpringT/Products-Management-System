@@ -53,8 +53,8 @@ module.exports.order = async (req, res) =>{
         products: products
     }
     
-    const order = new Order(objectOder)
-    order.save();
+    // const order = new Order(objectOder)
+    // order.save();
 
     await Cart.updateOne({
         _id: cartId 
