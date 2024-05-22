@@ -104,7 +104,7 @@ if(formChangeMulti){
             }
         }
 
-         
+          
 
         if(inputsChecked.length > 0){
             let ids = [];
