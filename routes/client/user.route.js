@@ -9,6 +9,8 @@ const uploadCloud = require("../../middlewares/admin/ulpoadCloud.middleware")
 const validate = require("../../validates/client/user.validate")
 
 const controller = require("../../controllers/client/user.controller")
+
+const authMDW = require("../../middlewares/client/auth.middleware")
 router.get("/register", controller.register);
 router.post(
     "/register", 
@@ -60,4 +62,11 @@ router.post(
     "/password/reset",
     controller.resetPasswordPost
 )
+
+router.get(
+    "/infor",
+    authMDW.requireAuth,
+    controller.infor
+)
+
 module.exports = router;

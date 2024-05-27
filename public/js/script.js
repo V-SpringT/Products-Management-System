@@ -253,7 +253,7 @@ if(priceRadio) {
 // end price ratio 
 
 
-// price text 
+// price text filter
 const priceInput = document.querySelector(".price-input")
 if(priceInput){
   let url = new URL(window.location.href)
@@ -277,5 +277,23 @@ if(priceInput){
   }
     
 }
-// end price text
+// end price text filter
 
+
+//add to cart
+  const formAddToCart = document.querySelector("[add-cart]")
+  if(formAddToCart){
+    const addCart = document.querySelectorAll(".inner-cart")
+    if(addCart.length >0){
+      addCart.forEach(item =>{
+        item.addEventListener("click",()=>{
+          const id = item.getAttribute("value")
+          const url = formAddToCart.getAttribute("action")
+          formAddToCart.action = url+id
+          formAddToCart.submit();
+        }) 
+      })
+      
+    }
+  }
+//end add to cart

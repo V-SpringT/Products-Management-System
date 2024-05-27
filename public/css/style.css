@@ -15,6 +15,9 @@
         display: none;
     } 
 
+    
+    
+    
     /* show ALert  */
         [show-alert] {
             position: fixed;
@@ -59,7 +62,6 @@
     .header{
         background-color: #ffffff;
         border-bottom: 1px solid #ddd;
-        overflow: hidden;
         z-index: 999;
         height: 70px;
     }
@@ -86,20 +88,34 @@
         align-items: center;
         justify-content: flex-end;
     }
-    .header .inner-menu > ul > li {
+    .header .inner-menu > ul > li { 
         margin-left: 1.3vw;
     } 
     .header .inner-menu > ul > li > a {
         font-weight: 600;
 
     }
-    .header .content .inner-user{
+    .header .content .user-infor{
         display: flex;
         align-items: center;
         justify-content: flex-end;
     }
-    .header .content .inner-user a i{
-        font-size: 30px;
+    .header .content .user-infor .inner-user{
+        color: #0172E2;
+    }
+    .header .content .user-infor .inner-user:hover{
+        cursor: pointer;
+    }
+    .header .content .user-infor .inner-user i{
+        font-size: 26px;
+    }
+    .header .inner-cart-header i{
+        font-size: 22px;
+        margin-left: 16px;
+    }
+    .header .inner-login a{
+        font-size: 14px;
+        font-weight: 500;
     }
 
 /* end header */
@@ -257,14 +273,23 @@
             transform: translateY(-50%);
             color: #353846;
             z-index: 2;
+            border: 0;
+            background-color: rgba(255, 255, 255, 0);
+            font-size: 20px;
         }
         .slick-next {
             position: absolute;
             top: 50%;
             right: 10px;
             transform: translateY(-50%);
-            color: #353846;
+            background-color: rgba(255, 255, 255, 0);
             z-index: 2;
+            border: 0;
+            font-size: 20px;
+        }
+
+        .home .content .featured-product{
+            margin-top: 20px;
         }
     /* end featured product  */
 
@@ -367,13 +392,12 @@
     /* lastest product  */
         .lastest-product .more{
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
         }
         .lastest-product .more a{
             text-decoration: none;
             display: inline-block;
             margin-right: 20px;
-            margin-bottom: 10px;
             font-weight: 600;
             font-size: 15px;
         }

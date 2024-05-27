@@ -5,6 +5,7 @@ const genString = require('../helper/generate');
 const userSchema = new mongoose.Schema(
     {     
         fullName: String,
+        cart_id: String,
         email: String,
         password: String,
         tokenUser: {

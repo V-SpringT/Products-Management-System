@@ -29,10 +29,10 @@ block content
                                     img(src=pro.productInfor.thumbnail, alt="anh sp", width= "100px", height= "auto")
                                 td 
                                     a(href=`/products/detail/${pro.product_id}`) #{pro.productInfor.title}
-                                td #{pro.productInfor.newPrice}
+                                td #{pro.productInfor.newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<i class="fa-solid fa-dong-sign"></i>
                                 td #{pro.quantity}
-                                td #{pro.totalPrice}
-                h3(class="text-end") Tổng đơn hàng : #{cart.total}
+                                td #{pro.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<i class="fa-solid fa-dong-sign"></i>
+                h3(class="text-end") Tổng đơn hàng : #{cart.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<i class="fa-solid fa-dong-sign"></i>
 
         if(cart.products.length > 0)
             .row 

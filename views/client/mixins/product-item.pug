@@ -9,7 +9,7 @@ mixin product-item(item)
                     span -#{item.discountPercentage}%
             .inner-favor
                 <i class="fa-regular fa-heart"></i>
-            .inner-cart
+            .inner-cart(value=item.id)
                 <i class="fa-solid fa-cart-plus"></i>
         a(href=`/products/detail/${item.slug}` style="display: block;").inner-content 
             div(title=item.title).inner-title     
@@ -29,3 +29,4 @@ mixin product-item(item)
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
+    

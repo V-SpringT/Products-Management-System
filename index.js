@@ -40,6 +40,8 @@ route(app)
 const routeAdmin = require('./routes/admin/index.route.js');
 routeAdmin(app)
 
+
+
 // static public folder
 app.use(express.static(`${__dirname}/public`))
 
@@ -56,10 +58,6 @@ app.set("view engine","pug");
 const systemConfig = require("./config/system")
 app.locals.prefixAdmin = systemConfig.prefixAdmin
 
-app.listen(port,()=>{
-    console.log(`Example app listening on port ${port}`);
-});
-
 // tinymce . text editer
 const path = require('path');
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
@@ -67,3 +65,13 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 //import moment
 const moment = require('moment')
 app.locals.moment = moment
+
+app.get("*", (req, res)=>{
+    res.render("client/page/error/404",{
+        pageTitle: "404 NOT FOUND"
+    })
+})
+app.listen(port,()=>{
+    console.log(`Example app listening on port ${port}`);
+});
+

@@ -1,4 +1,4 @@
-const systemConfig = require("../../config/system");
+const Cart = require("../../model/carts.model")
 const User = require("../../model/users.model")
 const forgotPassword = require("../../model/forgot-password.model")
 const generate = require("../../helper/generate")
@@ -25,12 +25,23 @@ module.exports.registerPost = async (req,res)=>{
         return
     }
 
+    // cart
+    const cart = new Cart({});
+    await cart.save()
+    
+    const expiresTime = 1000 * 60 * 60 * 24 * 365  
+    res.cookie("cartId", cart.id, {
+        expires: new Date(Date.now() + expiresTime) 
+    })
+    req.body.cart_id = cart.id;
     req.body.password = md5(req.body.password);
     delete req.body.passwordCF
 
-    console.log( req.body)
+    console.log(req.body)
     const user = new User(req.body)
     await user.save()
+
+    
     res.cookie("tokenUser", user.tokenUser)
     res.redirect("/")
 }
@@ -68,12 +79,18 @@ module.exports.loginPost = async (req,res)=>{
         return
     }
     res.cookie("tokenUser", user.tokenUser)
+    const expiresTime = 1000 * 60 * 60 * 24 * 365  
+    res.cookie("cartId", user.cart_id, {
+        expires: new Date(Date.now() + expiresTime) 
+    })
+
     res.redirect("/")
 }
 
 //[get] /user/logout
 module.exports.logout = async (req,res) => {
     res.clearCookie("tokenUser")
+    res.clearCookie("cartId")
     res.redirect("/")
 }
 
@@ -144,6 +161,10 @@ module.exports.otpPasswordPost = async (req, res) => {
         email: email
     })
 
+    const expiresTime = 1000 * 60 * 60 * 24 * 365  
+    res.cookie("cartId", user.cart_id, {
+        expires: new Date(Date.now() + expiresTime) 
+    })
     res.cookie("tokenUser", user.tokenUser)
 
     res.redirect("/user/password/reset")
@@ -170,6 +191,12 @@ module.exports.resetPasswordPost = async (req, res) => {
     },{
         password: md5(password)
     })
+
     req.flash("Đổi mật khẩu thành công")
     res.redirect("/")
+}
+
+//[get] /user/password/reset
+module.exports.infor = async (req, res) => {
+    res.render("client/page/user/infor.pug")
 }

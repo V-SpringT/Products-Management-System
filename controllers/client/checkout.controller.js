@@ -58,7 +58,7 @@ module.exports.order = async (req, res) =>{
 
     await Cart.updateOne({
         _id: cartId 
-    },{
+    },{ 
         products: []
     })
 

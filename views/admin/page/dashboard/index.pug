@@ -1,4 +1,54 @@
 extends ../../layout/default.pug
-
 block main
-    h1 Trang tong quan
+    h2 Trang tổng quan
+
+    .row.mt-4 
+        .col-12 
+            .card.mb-4 
+                .card-header Thông tin tài khoản
+                .card-body.row
+                    .col-6 
+                        if(userMDW.fullName)
+                            p Họ tên: <b>#{userMDW.fullName}</b>
+                        if(userMDW.email)
+                            p Email: <b>#{userMDW.email}</b>
+                        if(userMDW.phone)
+                            p Số điện thoại: <b>#{userMDW.phone}</b>
+                        p
+                            span Trạng thái: 
+                            span 
+                                <b>#{userMDW.status == "active" ? "Hoạt động" : "Dừng hoạt động"}</b>
+                        if(roleMDW.title)
+                            p Phân quyền: <b>#{roleMDW.title}</b>
+                    .col-6
+                        if(userMDW.avatar)
+                            img(src=userMDW.avatar, alt="",  width="150px", class="mb-3")
+                
+        .col-6 
+            .card.mb-4 
+                .card-header Danh mục sản phẩm
+                .card-body 
+                    p Số lượng: <b>#{statistic.category.total}</b>
+                    p Họat động: <b>#{statistic.category.active}</b>
+                    p Dừng họat động: <b>#{statistic.category.inactive}</b>
+        .col-6 
+            .card.mb-4 
+                .card-header Sản phẩm
+                .card-body 
+                    p Số lượng: <b>#{statistic.product.total}</b>
+                    p Họat động: <b>#{statistic.product.active}</b>
+                    p Dừng họat động: <b>#{statistic.product.inactive}</b>
+        .col-6 
+            .card.mb-4 
+                .card-header Tải khoản admin
+                .card-body 
+                    p Số lượng: <b>#{statistic.admin.total}</b>
+                    p Họat động: <b>#{statistic.admin.active}</b>
+                    p Dừng họat động: <b>#{statistic.admin.inactive}</b>
+        .col-6 
+            .card.mb-4 
+                .card-header Tài khoản client
+                .card-body 
+                    p Số lượng: <b>#{statistic.client.total}</b>
+                    p Họat động: <b>#{statistic.client.active}</b>
+                    p Dừng họat động: <b>#{statistic.client.inactive}</b>

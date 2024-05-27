@@ -1,0 +1,16 @@
+extends ../../layouts/defaultDetail.pug
+block content  
+    .container
+        h1(style="text-align: center; color: #444444;") Danh sách bài viết
+        each article in articals
+            div.inner-article
+                div.inner-img
+                    img(src=article.thumbnail, alt="")
+                div.inner-content
+                    div.inner-title
+                        a(href=`/artical/detail/${article.id}`)  #{article.title}
+                    div.inner-summary !{article.description}
+                    div.inner-readmore
+                        a(href=`/artical/detail/${article.id}`)  Xem thêm
+
+    link(rel="stylesheet" href="/css/artical.css")

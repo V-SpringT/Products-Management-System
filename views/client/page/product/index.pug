@@ -9,8 +9,9 @@ block sider
             name="sort"
             sort-select 
         )
-            option(value="position-desc") Vị trí giảm dần 
-            option(value="position-asc") Vị trí tăng dần
+            option(value="") --Lựa chọn sắp xếp--
+            option(value="discountPercentage-desc") Giảm giá giảm dần 
+            option(value="discountPercentage-asc") Giảm giá tăng dần
             option(value="price-desc") Giá giảm dần 
             option(value="price-asc") Giá tăng dần 
         
@@ -58,37 +59,34 @@ block sider
 
         div(class="price-input")
             h6 Nhập khoảng giá
-            div(class="row")
-                div(class="col-5")
+            .row
+                div(class="col-12")
                     input(type="number" min=0 max=10000000 class="form-control min-price" placeholder="thấp nhất")
-                div(class="col-2")
-                    <i class="fa-solid fa-minus"></i>
-                div(class="col-5")
+            .row
+                div(class="col-12")
                     input(type="number" min=0 max=10000000 class="form-control max-price" placeholder="cao nhất")
-                button(class="btn btn-primary btn-sub") Áp dụng
+            button(class="btn btn-primary btn-sub") Áp dụng
                             
 block content
     div.desc-img
         div(id="desc-img" class="carousel-inner")
             div(class="big-desc-img")
-                img(src="/image/slider1.jpg", alt="")
-            div(class="big-desc-img")
                 img(src="/image/slider2.jpg", alt="")
-            div(class="big-desc-img")
-                img(src="/image/slider3.jpg", alt="")
-    div.list-product
+    div.list-product(style="margin-bottom: 20px;")
         each p in products 
             +product-item(p)
     +pagination(pagination)
     div(class="sale")
-        h4 Sản phẩm siêu giảm giá
+        h4(style="color: #ffffff;") Sản phẩm siêu giảm giá
         div(class="sale-products")
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            each item in saleProducts
+                form(
+                    add-cart
+                    method="POST"
+                    action=`/cart/add/`
+                )   
+                    input.d-none(name="quantity", value="1")
+                    +product-item(item)
     link(rel="stylesheet", href="/css/products.css")
 
             

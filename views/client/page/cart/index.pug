@@ -31,7 +31,7 @@ block content
                                         img(src=pro.productInfor.thumbnail, alt="anh sp", width= "100px", height= "auto")
                                     td 
                                         a(href=`/products/detail/${pro.product_id}`) #{pro.productInfor.title}
-                                    td #{pro.productInfor.newPrice}
+                                    td #{pro.productInfor.newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<i class="fa-solid fa-dong-sign"></i>
                                     td 
                                         input(
                                             type="number",
@@ -41,7 +41,7 @@ block content
                                             product-id= pro.product_id
                                             name="quantity"
                                         )
-                                    td #{pro.totalPrice}
+                                    td #{pro.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<i class="fa-solid fa-dong-sign"></i>
                                     td  
                                         a(
                                             href=`/cart/delete/${pro.product_id}`
@@ -50,7 +50,7 @@ block content
                                         ) Xóa 
                         else 
                             p Không có sản phẩm nào
-                h3(class="text-end") Tổng đơn hàng : #{cart.total}
+                h3(class="text-end") Tổng đơn hàng : #{cart.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<i class="fa-solid fa-dong-sign"></i>
                 div(class="text-end mt-3")
                     a(href="/checkout" class="btn btn-success" ) Thanh toán 
 

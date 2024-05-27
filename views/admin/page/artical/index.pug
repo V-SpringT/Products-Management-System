@@ -1,0 +1,94 @@
+extends ../../layout/default.pug
+include ../../mixins/Alert
+block main
+    +alert-success(5000) 
+    +alert-error(5000)
+    h1 Bài viết
+    .card.mb-3
+        .card-header Danh sách
+            .card-body
+                .row.mb-4 
+                    .col-8
+                    .col-2.text-center 
+                        a(
+                            href=`${prefixAdmin}/artical/deleted-brands`
+                            class="btn btn-outline-danger"
+                        ) <i class="fa-solid fa-trash"></i> Đã Xóa
+                    .col-2
+                        a(
+                            href=`${prefixAdmin}/artical/create`
+                            class="btn btn-outline-success"
+                        ) <i class="fa-solid fa-file-circle-plus"></i> Thêm mới
+                table(
+                    class="table table-hover table-sm"
+                    checkbox-multi
+                )
+                    thead 
+                        tr 
+                            th
+                                input(
+                                    type= "checkbox"
+                                    name= "checkall"
+                                )
+                            th STT 
+                            th Hình ảnh
+                            th Tiêu đề
+                            th Trạng thái 
+                            th Hành động
+
+                    tbody 
+                        each item,index in articals   
+                            tr 
+                                td 
+                                    input(
+                                        type = "checkbox"
+                                        name = "id"
+                                        value = item.id
+                                    )
+                                td  #{index+1} 
+                                td 
+                                    img(src=item.thumbnail, alt=item.title, width= "100px", height= "auto")
+                                td #{item.title}
+                                td 
+                                    if item.status == "active"
+                                        a(
+                                            href= `javascript:;` 
+                                            data-status= item.status
+                                            data-id = item.id 
+                                            button-change-status=""
+                                            class="badge text-bg-success" 
+                                            style="text-decoration: none"
+                                        ) hoạt động
+                                    else 
+                                        a(
+                                            href="javascript:;" 
+                                            data-status= item.status
+                                            data-id = item.id 
+                                            button-change-status=""
+                                            class="badge text-bg-danger" 
+                                            style="text-decoration: none"
+                                        ) Dừng hoạt động
+                                td  
+                                    a(
+                                        class="btn btn-secondary btn-sm me-1"
+                                        href=`${prefixAdmin}/artical/detail/${item.id}`
+                                    ) Chi tiết 
+                                    a(
+                                        class="btn btn-warning btn-sm me-1"
+                                        href=`${prefixAdmin}/artical/edit/${item.id}`
+                                    ) Sửa 
+                                    button(class="btn btn-danger btn-sm" btn-delete data-id= item.id) Xóa
+    form(
+        id="form-delete-item"
+        action=""
+        method="POST"
+        data-path=`${prefixAdmin}/artical/delete`
+        form-delete-item
+    ) 
+    form(
+        id="form-change-status"
+        action=""
+        method="POST"
+        data-path=`${prefixAdmin}/artical/change-status`
+    )
+    script(src="/admin/js/brands.js")

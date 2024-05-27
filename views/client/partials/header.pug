@@ -33,10 +33,23 @@ header.header
                         li
                             a(href="/artical" class="text-decoration-none") <i class="fa-solid fa-newspaper"></i> Bài viết
             .col-1.d-flex
-                .inner-user
-                    a(href="/user" class="text-decoration-none") <i class="fa-solid fa-circle-user"></i>
-                .inner-cart-header  
-                    a(href="/cart" class="text-decoration-none") 
-                        <i class="fa-solid fa-cart-plus"></i>
-                        .inner-quantity 
-                            span #{miniCart ? miniCart.products.length : 0}
+                if(userMDW)
+                    div.user-infor
+                        .inner-user.dropdown.text-center
+                            div.dropdown-toggle(id="userDropdown" data-bs-toggle="dropdown")
+                                <i class="fa-solid fa-circle-user"></i>
+                            ul.dropdown-menu(aria-labelledby="userDropdown")
+                                li
+                                    a.dropdown-item(href="/user/infor") Thông tin cá nhân
+                                li
+                                    a.dropdown-item(href="/user/logout") Đăng xuất
+                        .inner-cart-header  
+                            a(href="/cart" class="text-decoration-none") 
+                                <i class="fa-solid fa-cart-plus"></i>
+                else    
+                    .inner-login 
+                        a(
+                            href=`/user/login`
+                            class="btn btn-primary"
+                            style="padding:6px;"
+                        ) Đăng nhập

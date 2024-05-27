@@ -8,7 +8,8 @@ const accounts = require("./accounts.route.js")
 const auth = require("./auth.route.js")
 const myAccount = require("./my-account.route.js")
 const brand = require("./brands.route.js")
-
+const articalRoutes = require("./artical.route.js")
+const articalCatgoryRoutes = require("./artical-category.route.js")
 const authMiddleware = require("../../middlewares/admin/auth.middleware")
 
 module.exports = (app)=>{
@@ -48,5 +49,17 @@ module.exports = (app)=>{
         PATH_ADMIN + "/brands", 
         authMiddleware.requireAuth,
         brand
+    )
+
+    app.use(
+        PATH_ADMIN + '/artical',
+        authMiddleware.requireAuth,
+        articalRoutes
+    )
+
+    app.use(
+        PATH_ADMIN + '/artical-category',
+        authMiddleware.requireAuth,
+        articalCatgoryRoutes
     )
 }

@@ -1,36 +1,32 @@
 extends ../../layouts/default.pug
 include ../../mixins/product-item
+include ../../mixins/Alert
+
 block sider
     div(class="product-category sub-sider")
-        h4 Danh mục sản phẩm
+        h5 Danh mục sản phẩm
         ul 
-            each item in [1,2,3,4,5,6]
+            each item in productCategorys
                 li 
-                    a(href="" class="") 
+                    a(href=`/products/${item.slug}` class="") 
                         div(class="img-box")
-                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                        p Danh muc 1 Danh muc 1
+                            img(src=item.thumbnail, alt="")
+                        p #{item.title}
             
     div(class="artical-category sub-sider")
-        h4 Danh mục bài viết
+        h5 Danh mục bài viết
         ul 
-            each item in [1,2,3,4,5,6]
+            each item in articalCategorys
                 li 
-                    a(href="" class="")
+                    a(href=`/artical/${item.slug}` class="")
                         div(class="img-box")
-                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                        p  Danh muc 1
+                            img(src=item.thumbnail, alt="")
+                        p #{item.title}
     div(class="featured sub-sider")
-        h4 Nổi bật
-        ul 
-            each item in [1,2,3,4,5,6]
-                li 
-                    a(href="" class="")
-                        div(class="img-box")
-                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png", alt="")
-                        p Danh muc 1
+        h5 Nổi bật
         
 block content
+    +alert-success("5000")
     div.desc-img
         div( id="desc-img" class="carousel-inner")
             div(class="big-desc-img")
@@ -40,7 +36,7 @@ block content
             div(class="big-desc-img")
                 img(src="/image/slider3.jpg", alt="")     
         .row.my-2
-            .col-4.d-flex.justify-content-center
+            .col-4.d-flex
                 div.coupon
                     img(src="https://file.hstatic.net/200000306687/file/background-coupon_d5a81f5bc7ea49_ec6d59fdd17c4a718809792590ed9455.png", alt="")
                     div.inner-coupon 
@@ -65,7 +61,13 @@ block content
         h3 Sản phẩm nổi bật      
         div.featured-box
             each item in featuredProducts
-                +product-item(item)
+                form(
+                    add-cart
+                    method="POST"
+                    action=`/cart/add/`
+                )   
+                    input.d-none(name="quantity", value="1")
+                    +product-item(item)
     div(class="sale")
         div(class="slogan")
             img(src="/image/slogan_sale.png", alt="")
@@ -85,16 +87,18 @@ block content
                         span(id="seconds" class="num") 00  
                         span(class="txt") Giây  
         div(class="sale-products")
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
-            div(class="Featured" style=" background: blue; padding: 50px 100px;") Sản phẩm 1
+            each item in saleProducts
+                form(
+                    add-cart
+                    method="POST"
+                    action=`/cart/add/`
+                )   
+                    input.d-none(name="quantity", value="1")
+                    +product-item(item)
     div(class="lastest-product")
-        h3 Sản phẩm mới    
         div(class="more")
-            a(href="") Xem thêm <i class="fa-solid fa-arrow-right"></i>
+            h3 Sản phẩm mới    
+            a(href="/products") Xem thêm <i class="fa-solid fa-arrow-right"></i>
         div.lastest-box
             each item in lastestProducts
                 +product-item(item)
