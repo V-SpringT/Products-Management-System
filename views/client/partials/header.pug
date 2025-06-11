@@ -1,4 +1,3 @@
-
 header.header
     .container 
         .row.content
@@ -21,9 +20,9 @@ header.header
                         )   
                         button(
                             type="submit"
-                            class="btn btn-primary"
+                            class="btn btn-primary btn-search"
                         ) Tìm kiếm
-            .col-4
+            .col-4.pc-feature
                 .inner-menu
                     ul
                         li
@@ -34,8 +33,8 @@ header.header
                             a(href="/artical" class="text-decoration-none") <i class="fa-solid fa-newspaper"></i> Bài viết
             .col-1.d-flex
                 if(userMDW)
-                    div.user-infor
-                        .inner-user.dropdown.text-center
+                    div.user-infor.pc-feature
+                        .inner-user.dropdown.text-center.pc-feature
                             div.dropdown-toggle(id="userDropdown" data-bs-toggle="dropdown")
                                 <i class="fa-solid fa-circle-user"></i>
                             ul.dropdown-menu(aria-labelledby="userDropdown")
@@ -43,13 +42,40 @@ header.header
                                     a.dropdown-item(href="/user/infor") Thông tin cá nhân
                                 li
                                     a.dropdown-item(href="/user/logout") Đăng xuất
-                        .inner-cart-header  
+                        .inner-cart-header.pc-feature
                             a(href="/cart" class="text-decoration-none") 
                                 <i class="fa-solid fa-cart-plus"></i>
                 else    
-                    .inner-login 
+                    .inner-login.pc-feature
                         a(
                             href=`/user/login`
                             class="btn btn-primary"
                             style="padding:6px;"
                         ) Đăng nhập
+            .col-1.d-flex.mobile-feature
+                .hamburger-menu.mobile-feature
+                    button.btn.btn-link(type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu")
+                        <i class="fa-solid fa-bars"></i>
+    
+    .offcanvas.offcanvas-end#offcanvasMenu(tabindex="-1" aria-labelledby="offcanvasMenuLabel")
+        .offcanvas-header
+            h5.offcanvas-title#offcanvasMenuLabel Menu
+            button.btn-close(type="button" data-bs-dismiss="offcanvas" aria-label="Close")
+        .offcanvas-body
+            ul.list-unstyled
+                li.mb-3
+                    a.text-decoration-none(href="/") <i class="fa-solid fa-house"></i> Trang chủ
+                li.mb-3
+                    a.text-decoration-none(href="/products") <i class="fa-brands fa-product-hunt"></i> Sản phẩm
+                li.mb-3
+                    a.text-decoration-none(href="/artical") <i class="fa-solid fa-newspaper"></i> Bài viết
+                if(userMDW)
+                    li.mb-3
+                        a.text-decoration-none(href="/cart") <i class="fa-solid fa-cart-plus"></i> Giỏ hàng
+                    li.mb-3
+                        a.text-decoration-none(href="/user/infor") <i class="fa-solid fa-user"></i> Thông tin cá nhân
+                    li.mb-3
+                        a.text-decoration-none(href="/user/logout") <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                else
+                    li.mb-3
+                        a.text-decoration-none(href="/user/login") <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập

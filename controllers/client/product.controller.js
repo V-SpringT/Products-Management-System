@@ -1,4 +1,3 @@
-
 const Product = require("../../model/products.model");
 const productsCategory = require("../../model/products-category.model");
 const paginationHelper = require("../../helper/pagination");
@@ -143,7 +142,7 @@ module.exports.detail = async (req,res)=>{
                 product.category = category
             }
 
-            product.newPrice =  (product.price*(100-product.discountPercentage)/100).toFixed(0);
+            product.newPrice = Math.round(product.price*(100-product.discountPercentage)/100);
 
             res.render("client/page/product/detail",{
                 pageTitle: "Trang chi tiết sản phẩm",

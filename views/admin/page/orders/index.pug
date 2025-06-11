@@ -1,0 +1,76 @@
+extends ../../layout/default.pug
+include ../../mixins/pagination.pug
+include ../../mixins/Alert
+
+block main
+    +alert-success("5000")
+    if(roleMDW.permissions.includes("orders_view"))
+        h1 Danh sách đơn hàng
+
+        .card.mb-3
+            .card-header Danh sách đơn hàng
+                .card-body
+                    table(
+                        class="table table-hover table-sm"
+                    )
+                        thead 
+                            tr 
+                                th STT 
+                                th Mã đơn hàng
+                                th Tên khách hàng
+                                th Số điện thoại
+                                th Địa chỉ
+                                th Tổng tiền
+                                th Trạng thái 
+                                th Hành động
+
+                        tbody 
+                            each item,index in orders   
+                                tr 
+                                    td #{pagination.skip+index+1} 
+                                    td ##{item._id}
+                                    td #{item.userInfor.fullName}
+                                    td #{item.userInfor.phone}
+                                    td #{item.userInfor.address}
+                                    td #{item.total.toLocaleString('vi-VN')}đ
+                                    td 
+                                        if(roleMDW.permissions.includes("orders_edit"))
+                                            if item.status == "active"
+                                                a(
+                                                    href= `javascript:;` 
+                                                    data-status= item.status
+                                                    data-id = item.id 
+                                                    button-change-status=""
+                                                    class="badge text-bg-success" 
+                                                    style="text-decoration: none"
+                                                ) Đã xác nhận
+                                            else 
+                                                a(
+                                                    href="javascript:;" 
+                                                    data-status= item.status
+                                                    data-id = item.id 
+                                                    button-change-status=""
+                                                    class="badge text-bg-danger" 
+                                                    style="text-decoration: none"
+                                                ) Chờ xác nhận
+                                        else
+                                            if item.status == "active"
+                                                a(
+                                                    class="badge text-bg-success" 
+                                                    style="text-decoration: none"
+                                                ) Đã xác nhận
+                                            else 
+                                                a(
+                                                    class="badge text-bg-danger" 
+                                                    style="text-decoration: none"
+                                                ) Chờ xác nhận
+                                    td  
+                                        a(
+                                            class="btn btn-secondary btn-sm me-1"
+                                            href=`${prefixAdmin}/orders/detail/${item.id}`
+                                        ) Chi tiết 
+                                        if(roleMDW.permissions.includes("orders_delete"))
+                                            button(class="btn btn-danger btn-sm" btn-delete data-id= item.id) Xóa 
+
+                    +pagination(pagination)
+    script(src="/admin/js/script.js") 

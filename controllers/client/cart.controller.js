@@ -45,6 +45,7 @@ module.exports.delete = async(req,res) =>{
 }
 //[post] /cart/add/:productId
 module.exports.addPost = async(req,res) =>{
+   try {
     const cartId = req.cookies.cartId;           
     const productId = req.params.productId;
     const quantity = parseInt(req.body.quantity);
@@ -86,7 +87,10 @@ module.exports.addPost = async(req,res) =>{
     }
     
     req.flash("success", "Thêm vào giỏ hàng thành công")
-    res.location(req.get("Referrer") || "/")
+    res.redirect("back")
+   }catch(e){
+    console.log(e)
+   }
 }
 //[get] /update/:productId/:quantity
 module.exports.update = async (req,res) =>{

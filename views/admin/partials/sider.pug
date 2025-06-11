@@ -12,6 +12,9 @@
             if(roleMDW.permissions.includes("roles_view"))
                 li 
                     a(href=`${prefixAdmin}/roles`) Danh sách nhóm quyền
+            if(roleMDW.permissions.includes("orders_view"))
+                li 
+                    a(href=`${prefixAdmin}/orders`) Đơn hàng
             //- li 
             //-     a(href=`${prefixAdmin}/brands`) Thương hiệu
             //- li 

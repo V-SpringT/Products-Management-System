@@ -70,11 +70,16 @@
         align-items: center;
         margin: 0 0;
     }
+
+    .header .content .inner-logo{
+        width: 56px;
+        height: 56px;
+    }
     .header .content .inner-logo a {
         display: block;
         aspect-ratio: 1/1;
         overflow: hidden;
-        width: 35%;
+        width: 100%;
     }
     .header .content a img{
         object-fit: cover;
@@ -90,10 +95,14 @@
     }
     .header .inner-menu > ul > li { 
         margin-left: 1.3vw;
-    } 
+    }
     .header .inner-menu > ul > li > a {
         font-weight: 600;
-
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px;
+        display: inline-block;
     }
     .header .content .user-infor{
         display: flex;
@@ -116,6 +125,61 @@
     .header .inner-login a{
         font-size: 14px;
         font-weight: 500;
+        white-space: nowrap;
+    }
+
+    /* Hamburger Menu */
+    .hamburger-menu {
+        display: none;
+    }
+    .hamburger-menu .btn-link {
+        color: #333;
+        font-size: 24px;
+        padding: 0;
+    }
+    .hamburger-menu .btn-link:hover {
+        color: #0172E2;
+    }
+    .offcanvas {
+        background: #fff;
+    }
+    .offcanvas .list-unstyled li a {
+        color: #333;
+        font-size: 16px;
+        padding: 8px 0;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .offcanvas .list-unstyled li a:hover {
+        color: #0172E2;
+    }
+    .offcanvas .list-unstyled li a i {
+        margin-right: 10px;
+        width: 20px;
+    }
+
+    /* Responsive Header */
+    @media (max-width: 991px) {
+        .header .pc-feature {
+            display: none;
+        }
+        .hamburger-menu {
+            display: block;
+        }
+        .header .content {
+            justify-content: space-between;
+        }
+        .header .search-box{
+            width: 300px;
+        }
+        .header .search-box .form-group {
+            height: 38px;
+        }
+        .header .search-box .btn-search{
+            white-space: nowrap;
+        }
     }
 
 /* end header */
