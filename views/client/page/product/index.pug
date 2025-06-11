@@ -28,19 +28,19 @@ block sider
                             type="checkbox"  
                         )
                         label(class="form-check-label" for=item.id) #{item.title}
-    div(class="filter-type sub-sider")
-        h4 Loại giày
-        ul 
-            each item,idx in siderVar.type
-                li 
-                    div(class="form-check type-checkbox")
-                        input(
-                            class="form-check-input" 
-                            value=idx
-                            id=item
-                            type="checkbox" 
-                        )
-                        label(class="form-check-label" for=item) #{item}
+    //- div(class="filter-type sub-sider")
+    //-     h4 Loại giày
+    //-     ul 
+    //-         each item,idx in siderVar.type
+    //-             li 
+    //-                 div(class="form-check type-checkbox")
+    //-                     input(
+    //-                         class="form-check-input" 
+    //-                         value=idx
+    //-                         id=item
+    //-                         type="checkbox" 
+    //-                     )
+    //-                     label(class="form-check-label" for=item) #{item}
     div(class="filter-price sub-sider")
         div(class="price-radio")
             h4 Giá

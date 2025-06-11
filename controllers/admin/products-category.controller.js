@@ -3,56 +3,68 @@ const systemConfig = require("../../config/system");
 const createTreeHelper = require("../../helper/createTree")
 //[GET] /admin/products-category
 module.exports.index = async (req,res) =>{
-    let find ={
-        deleted: false,
-    }
-    const categorys = await productsCategory.find(find)
-    const categorysTree = createTreeHelper.tree(categorys,"")
-    res.render(
-        "admin/page/products-category/index.pug",
-        {
-            pageTitle: "Danh mục sản phẩm",
-            categorys: categorysTree
+    try{
+        let find ={
+            deleted: false,
         }
-    )
+        const categorys = await productsCategory.find(find)
+        const categorysTree = createTreeHelper.tree(categorys,"")
+        res.render(
+            "admin/page/products-category/index.pug",
+            {
+                pageTitle: "Danh mục sản phẩm",
+                categorys: categorysTree
+            }
+        )
+    }catch(e){
+        console.log("get category error", e)
+    }
 }
 
 //[GET] /admin/products-category/create
 module.exports.create = async (req,res) =>{
-    let find={
-        deleted: false,
-    }
-    const categorys = await productsCategory.find(find)
-    const categorysTree = createTreeHelper.tree(categorys,"")
-    res.render(
-        "admin/page/products-category/create.pug",
-        {
-            pageTitle: "Danh mục sản phẩm",
-            categorys: categorysTree
+    try {
+        let find={
+            deleted: false,
         }
-    )
+        const categorys = await productsCategory.find(find)
+        const categorysTree = createTreeHelper.tree(categorys,"")
+        res.render(
+            "admin/page/products-category/create.pug",
+            {
+                pageTitle: "Danh mục sản phẩm",
+                categorys: categorysTree
+            }
+        )
+    } catch(e) {
+        console.log("Create category error:", e)
+        res.redirect(`${systemConfig.prefixAdmin}/products-category`)
+    }
 }
 
 //[POST] /admin/products-category/create
 module.exports.createPost = async (req,res) =>{
-    if(res.locals.roleMDW.permissions.includes("products-category_create")){
-        if(isNaN(req.body.positon)){
-            const counter = await productsCategory.countDocuments()
-            req.body.position = parseInt(counter + 1)
+    try{
+        if(res.locals.roleMDW.permissions.includes("products-category_create")){
+            if(!req.body.position){
+                const counter = await productsCategory.countDocuments()
+                req.body.position = parseInt(counter + 1)
+            }
+            else{
+                req.body.position = parseInt(req.body.position)
+            }
+            const record = new productsCategory(req.body)
+            await record.save();
+            res.redirect(`${systemConfig.prefixAdmin}/products-category`)
         }
         else{
-            req.body.position = parseInt(req.body.positon)
+            res.redirect(`${systemConfig.prefixAdmin}/products-category`)
         }
-        console.log(req.body)
-        const record = new productsCategory(req.body)
-        await record.save();
-    
+    }catch(e){
+        console.log("Create post category error:", e)
+        req.flash("error", "Thêm danh mục sản phẩm thất bại")
         res.redirect(`${systemConfig.prefixAdmin}/products-category`)
     }
-    else{
-        return;
-    }
-    
 }
 
 //[GET] /admin/products-category/detail/:id
@@ -101,14 +113,16 @@ module.exports.edit = async (req,res) => {
 }
 //[Patch] /admin/products-category/edit/:id
 module.exports.editPatch = async (req,res) => {
-    const id = req.params.id;
-
-    req.body.position = parseInt(req.body.position)
-    console.log(req.body)
-
-    await productsCategory.updateOne({_id: id},req.body)
-    
-    res.redirect("back")
+    try {
+        const id = req.params.id;
+        req.body.position = parseInt(req.body.position)
+        await productsCategory.updateOne({_id: id},req.body)
+        res.redirect("back")
+    } catch(e) {
+        console.log("Edit patch category error:", e)
+        req.flash("error", "Cập nhật danh mục thất bại")
+        res.redirect("back")
+    }
 }
 //[Delete] /admin/products-category/delete/:id
 module.exports.delete = async (req,res) => {

@@ -8,9 +8,11 @@ const createTreeHelper = require("../../helper/createTree")
 
 // [GET] /home
 module.exports.index = async (req,res)=>{
+    try{
     //featured product
     const featuredProducts = await Product.find(
-        {deleted: false, status:"active", featured:"1"})
+        {deleted: false, status:"active", featured:"1"}
+    )
     const newProducts = featuredProducts.map(item => {
         item.newPrice = (
             (item.price*(100 - item.discountPercentage))/100
@@ -67,4 +69,8 @@ module.exports.index = async (req,res)=>{
         productCategorys: category,
         articalCategorys: articalCategorys
     });
+    }catch(e){
+        console.log(e)
+    }
+
 }   

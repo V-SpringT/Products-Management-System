@@ -27,7 +27,7 @@ module.exports.index = async(req,res) =>{
         })
     }
     catch(e){
-
+        console.log(e)
     }
 }
 //[get] /delete/:productId
@@ -65,7 +65,7 @@ module.exports.addPost = async(req,res) =>{
     if(existProduct){
         const curQuantity = quantity + existProduct.quantity;
         await Cart.updateOne(
-            {
+            {   
                 _id: cartId,
                 'products.product_id': productId
             },
@@ -86,7 +86,7 @@ module.exports.addPost = async(req,res) =>{
     }
     
     req.flash("success", "Thêm vào giỏ hàng thành công")
-    res.redirect("back")
+    res.location(req.get("Referrer") || "/")
 }
 //[get] /update/:productId/:quantity
 module.exports.update = async (req,res) =>{

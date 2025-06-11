@@ -11,7 +11,6 @@ const roleSchema = new mongoose.Schema(
             default : []
         },
         description: String,
-        price: Number,
         deleted: {
             type: Boolean,
             default: false

@@ -31,6 +31,19 @@
     "tinymce": "^7.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
-  }
+    "autoprefixer": "^10.4.20",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/V-SpringT/Products-Management-System.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/V-SpringT/Products-Management-System/issues"
+  },
+  "homepage": "https://github.com/V-SpringT/Products-Management-System#readme"
 }

@@ -162,8 +162,8 @@ module.exports.create = async (req,res) =>{
         deleted: false,
         status: "active"
     }
-    const size = [35,36,37,38,39,40,41,42,43,44,45]
-    const type = ["Low-top","Mid-top","High-top"]
+    // const size = [35,36,37,38,39,40,41,42,43,44,45]
+    // const type = ["Low-top","Mid-top","High-top"]
 
     const categorys = await productsCategory.find(find)
     const brands = await Brand.find(find)
@@ -172,8 +172,8 @@ module.exports.create = async (req,res) =>{
         pageTitle: "Thêm mới sản phẩm",
         categorys : categorysTree,
         brands : brands,
-        size : size,
-        types: type
+        // size : size,
+        // types: type
     })
 
 }
@@ -183,23 +183,21 @@ module.exports.createPost = async (req,res) => {
     req.body.discountPercentage = parseFloat(req.body.discountPercentage)
     req.body.stock = parseInt(req.body.stock)
 
-    console.log(req.file)
-    if(isNaN(req.body.positon)){
+    if(!(req.body.positon)){
         const counter = await Product.countDocuments()
         req.body.position = parseInt(counter + 1)
     }
     else{
         req.body.position = parseInt(req.body.positon)
     }
-    console.log(res.locals.userMDW)
     req.body.createBy = {   
         accountId: res.locals.userMDW.id
     }
 
     //format size
-        req.body.size = req.body.size.split(",").map(sz =>{
-            return parseInt(sz)
-        })
+        // req.body.size = req.body.size.split(",").map(sz =>{
+        //     return parseInt(sz)
+        // })
     //end format size
 
     console.log(req.body)
